@@ -5,8 +5,7 @@
 <!-- ABOUT THE PROJECT -->
 
 <img width="1390" alt="Screenshot 2024-05-09 at 23 08 03" src="https://github.com/user-attachments/assets/f29e8e02-e75e-4c33-8d07-4357d69a3762">
-
-
+<img width="1751" alt="Screenshot 2024-09-23 at 21 39 41" src="https://github.com/user-attachments/assets/ddf334b9-056c-4602-bbbf-870344b85814">
 
 This is my first big project with React-Native. I wanted to test out as many things as possible but i don't wanted to think about the UI and UX, so I choose to create a Duolingo app.
 
