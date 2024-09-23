@@ -3,14 +3,9 @@
      
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
 
-<img width="1390" alt="Screenshot 2024-05-09 at 23 08 03" src="https://github.com/user-attachments/assets/1d9212b7-df73-4b40-97e2-c8a64c4393cd">
-<img width="1390" alt="Screenshot 2024-05-09 at 23 08 03" src="https://github.com/user-attachments/assets/78f48f67-72b2-4fa1-ade9-2541aa412e94">
+<img width="1390" alt="Screenshot 2024-05-09 at 23 08 03" src="https://github.com/user-attachments/assets/f29e8e02-e75e-4c33-8d07-4357d69a3762">
 
-<img width="1390" alt="Screenshot 2024-05-09 at 23 08 03" src="https://github.com/user-attachments/assets/cb603c15-db5e-4d8c-838d-8530122dcf24">
-<img width="1390" alt="Screenshot 2024-05-09 at 23 08 03" src="https://github.com/user-attachments/assets/232d3c87-024f-4641-9d39-73443e3871e0">
-<img width="1390" alt="Screenshot 2024-05-09 at 23 08 03" src="https://github.com/user-attachments/assets/1786889c-13ed-4e4f-942d-a8b2e2a45f75">
 
 
 This is my first big project with React-Native. I wanted to test out as many things as possible but i don't wanted to think about the UI and UX, so I choose to create a Duolingo app.
