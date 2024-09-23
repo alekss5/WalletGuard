@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expenseTracker",
-    "slug": "expenseTracker",
+    "name": "WalletGuard",
+    "slug": "Budget-Tracker",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -9,19 +9,41 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#666666"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "WalletGuard"
     },
     "android": {
+      "package": "com.expenseTracker",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#666666"
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#666666",
+          "defaultChannel": "default",
+          "sounds": [
+            "./local/assets/notification_sound.mp3"
+       
+          ]
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "350a4bbe-19ef-47c9-b675-7960458ed47b"
+      }
     }
   }
 }
