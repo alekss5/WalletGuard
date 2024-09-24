@@ -34,8 +34,13 @@ The app lets you:
 - Notification Reminders: Set up notifications to remind you of upcoming subscriptions or deadlines using expo-notifications.
 - Dark/Light Themes: Customize the user interface with light and dark themes for better user experience.
 - Seamless Data Backup: Keep data intact even when updating the app to a new version.
-
-
+  
+Notifications
+- Daily Notfications
+- Over Budget
+- Weekly Notifications
+- Subscription Notification
+- Monthly refresh Notification
 
 ## Demo
 
