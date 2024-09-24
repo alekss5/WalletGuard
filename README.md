@@ -7,7 +7,7 @@
 <img width="1390" alt="Screenshot 2024-05-09 at 23 08 03" src="https://github.com/user-attachments/assets/3411ac76-48ab-4bc7-9052-0a85d7838bf9">
 <img width="1751" alt="Screenshot 2024-09-23 at 21 39 41" src="https://github.com/user-attachments/assets/ddf334b9-056c-4602-bbbf-870344b85814">
 
-This is my first big project with React-Native. I wanted to test out as many things as possible but i don't wanted to think about the UI and UX, so I choose to create a Duolingo app.
+WalletGuard is a React Native budget and expense tracking app that helps you manage your income, expenses, and subscriptions with ease, featuring customizable currency options and seamless data storage using Realm.
 
 ### Built With
 <div >
@@ -23,13 +23,16 @@ This is my first big project with React-Native. I wanted to test out as many thi
 ## Features
 
 The app lets you:
-- Take multiple quizzes
-- Can play sound for each word
-- Haptics and sound feedbacks
-- Buy hearts
-- Login and register (saves the user data for 1 month then you have to login again)
-- Feed for latest news
-- Account information
+- Track Income and Expenses: Easily log and categorize income and expenses with intuitive inputs.
+- Subscription Management: Keep track of recurring subscriptions with details like amount, due date, and type.
+- Customizable Currency: Select and display transactions in your preferred currency using Redux for state management.
+- Expense Categorization: Organize expenses by categories like gifts, taxes, food, and more with customizable category colors.
+- Date-based Sorting: Filter expenses and income by specific months or periods to review past financial activity.
+- Budget Management: Set and adjust budgets for various categories to keep spending in check.
+- Local Data Storage: Securely store all financial data on the device using Realm, ensuring persistence across app updates.
+- Notification Reminders: Set up notifications to remind you of upcoming subscriptions or deadlines using expo-notifications.
+- Dark/Light Themes: Customize the user interface with light and dark themes for better user experience.
+- Seamless Data Backup: Keep data intact even when updating the app to a new version.
 
   ![short-ezgif com-speed](https://github.com/user-attachments/assets/1db3c5da-2834-4473-8647-4c44f308d141)
 
