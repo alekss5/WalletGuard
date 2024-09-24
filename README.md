@@ -4,7 +4,7 @@
 
 <!-- ABOUT THE PROJECT -->
 
-![short-ezgif com-speed](https://github.com/user-attachments/assets/1db3c5da-2834-4473-8647-4c44f308d141)
+
 
 <img width="1390" alt="Screenshot 2024-05-09 at 23 08 03" src="https://github.com/user-attachments/assets/f29e8e02-e75e-4c33-8d07-4357d69a3762">
 <img width="1751" alt="Screenshot 2024-09-23 at 21 39 41" src="https://github.com/user-attachments/assets/ddf334b9-056c-4602-bbbf-870344b85814">
@@ -31,7 +31,9 @@ The app lets you:
 - Buy hearts
 - Login and register (saves the user data for 1 month then you have to login again)
 - Feed for latest news
-- Account information 
+- Account information
+
+  ![short-ezgif com-speed](https://github.com/user-attachments/assets/1db3c5da-2834-4473-8647-4c44f308d141)
 
 
 
