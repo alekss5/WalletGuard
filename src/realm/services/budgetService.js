@@ -42,28 +42,3 @@ export const saveBudgetDataToRealm = (budgetState) => {
     console.error("Error saving Budget data to Realm: ", error);
   }
 };
-
-// export const saveBudgetDataToRealm = (budgetState) => {
-//         try {
-//           realm.write(() => {
-//             realm.create(
-//               "Budget",
-//               {
-//                 _id: "budgetState", // Unique ID for the budget state
-//                 total: budgetState.total,
-//                 expense: budgetState.expense,
-//                 income: budgetState.income,
-//                 startDate: budgetState.startDate,
-//                 currency: budgetState.currency,
-//                 subscriptionsArray: budgetState.subscriptionsArray,
-//                 expensesArray: budgetState.expensesArray,
-//                 incomeArray: budgetState.incomeArray,
-//                 budget: budgetState.budget,
-//               },
-//               Realm.UpdateMode.Modified // Update existing data if it exists
-//             );
-//           });
-//         } catch (error) {
-//           console.error("Error saving budget data to Realm: ", error);
-//         }
-//       };
