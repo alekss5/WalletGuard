@@ -3,13 +3,13 @@
      
 
 <!-- ABOUT THE PROJECT -->
-
+## WalletGuard - Expense Tracker
 <img width="1390" alt="Screenshot 2024-05-09 at 23 08 03" src="https://github.com/user-attachments/assets/3411ac76-48ab-4bc7-9052-0a85d7838bf9">
 <img width="1751" alt="Screenshot 2024-09-23 at 21 39 41" src="https://github.com/user-attachments/assets/ddf334b9-056c-4602-bbbf-870344b85814">
-
+<br></br>
 WalletGuard is a React Native budget and expense tracking app that helps you manage your income, expenses, and subscriptions with ease, featuring customizable currency options and seamless data storage using Realm.
 
-### Built With
+## Built With
 <div >
 	<img width="50" src="https://user-images.githubusercontent.com/25181517/117447155-6a868a00-af3d-11eb-9cfe-245df15c9f3f.png" alt="JavaScript" title="JavaScript"/> JavaScript
 	<img width="50" src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" alt="React" title="React"/> React-Native
@@ -19,6 +19,7 @@ WalletGuard is a React Native budget and expense tracking app that helps you man
 	<img width="50" src="https://user-images.githubusercontent.com/25181517/117269608-b7dcfb80-ae58-11eb-8e66-6cc8753553f0.png" alt="Android" title="Android"/><br/>
   
 </div>
+<br></br>
 
 ## Features
 
@@ -33,6 +34,10 @@ The app lets you:
 - Notification Reminders: Set up notifications to remind you of upcoming subscriptions or deadlines using expo-notifications.
 - Dark/Light Themes: Customize the user interface with light and dark themes for better user experience.
 - Seamless Data Backup: Keep data intact even when updating the app to a new version.
+
+
+
+## Demo
 
   ![short-ezgif com-speed](https://github.com/user-attachments/assets/1db3c5da-2834-4473-8647-4c44f308d141)
 
