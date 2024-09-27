@@ -5,7 +5,8 @@ import CustomText from '../../components/UI/CustomText';
 import CustomInput from '../../components/UI/CustomInput';
 import SubmitButton from '../../components/UI/SubmitButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAge, selectName, setPersonalInfo } from '../../redux/personalInfReducer';
+import {  setPersonalInfo } from '../../redux/personalInfReducer';
+import { selectAge, selectName } from '../../redux/selectors/personalInf';
 
 export default function PersonalInformation({ navigation }) {
     const dispatch = useDispatch();

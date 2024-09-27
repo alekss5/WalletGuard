@@ -33,10 +33,7 @@
           "icon": "./assets/notification-icon.png",
           "color": "#666666",
           "defaultChannel": "default",
-          "sounds": [
-            "./local/assets/notification_sound.mp3"
-       
-          ]
+          "sounds": []
         }
       ]
     ],

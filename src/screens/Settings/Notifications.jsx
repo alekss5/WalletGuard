@@ -4,12 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import BackgroundColorContainer from '../../components/UI/BackgroundColorContainer';
 import SettingsItem from '../../components/SettingsItem';
 import {
-  toggleNotification, selectDailyNotification,
+  toggleNotification
+} from '../../redux/uiReducer';
+import { selectDailyNotification,
   selectOverBudgetNotification,
   selectWeeklyNotification,
   selectSubscNotification,
-  selectMonthlyRefreshNotification,
-} from '../../redux/uiReducer';
+  selectMonthlyRefreshNotification, } from '../../redux/selectors/ui';
 
 export default function Notifications() {
   const dispatch = useDispatch();

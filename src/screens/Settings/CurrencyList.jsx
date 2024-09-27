@@ -4,10 +4,11 @@ import currencyCodes from 'currency-codes';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrency, setCurrency } from '../../redux/budgetReducer';
+import { setCurrency } from '../../redux/budgetReducer';
 import BackgroundColorContainer from '../../components/UI/BackgroundColorContainer';
 import CustomText from '../../components/UI/CustomText';
 import CustomInput from '../../components/UI/CustomInput';
+import { selectCurrency } from '../../redux/selectors/budget';
 
 const CurrencyList = ({ navigation }) => {
   const { colors } = useTheme();
@@ -31,7 +32,7 @@ const CurrencyList = ({ navigation }) => {
 
   const handlePress = useCallback((item) => {
     const symbol = getSymbolFromCurrency(item.code);
- 
+
     dispatch(setCurrency(symbol));
     navigation.goBack();
   }, [dispatch, navigation]);

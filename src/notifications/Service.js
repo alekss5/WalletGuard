@@ -1,6 +1,9 @@
 import * as Notifications from 'expo-notifications';
 import { Alert, Platform } from 'react-native';
 
+
+
+
 export async function requestNotificationPermission() {
   let granted = false;
 
@@ -16,6 +19,14 @@ export async function requestNotificationPermission() {
   const { status } = await Notifications.requestPermissionsAsync();
   
   if (status === 'granted') {
+    
+    Notifications.setNotificationHandler({
+      handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: true,
+        shouldSetBadge: false,
+      }),
+    });
     granted = true;
   } else if (status === 'denied') {
     Alert.alert(

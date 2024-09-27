@@ -1,11 +1,12 @@
 import { Pressable, StyleSheet } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectTheme, toggleTheme } from '../../redux/uiReducer'
+import {  toggleTheme } from '../../redux/uiReducer'
 import BackgroundColorContainer from '../../components/UI/BackgroundColorContainer'
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme, Divider } from 'react-native-paper'
 import CustomText from '../../components/UI/CustomText'
 import { lightVibration } from '../../utils/vibrationPaterns'
+import { selectTheme } from '../../redux/selectors/ui';
 
 export default function Theme() {
   const dispatch = useDispatch()
@@ -14,12 +15,12 @@ export default function Theme() {
 
   const setLightTheme = () => {
     lightVibration()
-    dispatch(toggleTheme('dark'))
+    dispatch(toggleTheme('light'));
   }
 
   const setDarkTheme = () => {
     lightVibration()
-    dispatch(toggleTheme('light'))
+    dispatch(toggleTheme('dark'))
   }
 
   return (

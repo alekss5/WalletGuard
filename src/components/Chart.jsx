@@ -3,7 +3,7 @@ import { useTheme } from 'react-native-paper'
 import { PieChart } from 'react-native-chart-kit';
 import CustomText from './UI/CustomText';
 
-export default function Chart({ chartData, title, text, amount }) {
+export default function Chart({ chartData, title, text, amount,currency }) {
 
   const { colors } = useTheme()
 
@@ -26,7 +26,8 @@ export default function Chart({ chartData, title, text, amount }) {
           hasLegend={false}
 
         />
-        <CustomText style={styles.text}>{text} {amount}</CustomText>
+        <CustomText style={styles.text}>{text} {amount}{currency}</CustomText>
+        
       </View>
 
     </View>

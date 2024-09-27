@@ -3,9 +3,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import { lightVibration } from '../utils/vibrationPaterns';
-import { selectVisibleMonthlyBudget, selectVisibleMonthlyGoal, selectVisibleTotalBalance } from '../redux/uiReducer';
-import { selectBudgetData, selectExpensesArray } from '../redux/budgetReducer';
-import { selectName } from '../redux/personalInfReducer';
+import { selectVisibleMonthlyBudget, selectVisibleMonthlyGoal, selectVisibleTotalBalance } from '../redux/selectors/ui';
+import { selectBudgetData, selectExpensesArray } from '../redux/selectors/budget';
 import BackgroundColorContainer from '../components/UI/BackgroundColorContainer';
 import BackgroundImageContainer from '../components/UI/BackgroundImageContainer';
 import BalanceCard from '../components/BalanceCard';
@@ -14,6 +13,7 @@ import CustomText from '../components/UI/CustomText';
 import CustomDivider from '../components/UI/CustomDivider';
 import Chart from '../components/Chart';
 import CustomButton from '../components/UI/CustomButton';
+import { selectName } from '../redux/selectors/personalInf';
 
 const { width } = Dimensions.get('window');
 const isSmallDevice = width < 370;
@@ -67,11 +67,11 @@ export default function HomeScreen({ navigation }) {
                 />
                 <View style={{ width: '90%', alignSelf: 'center' }}>
                   {visibleMonthlyGoal && (
-                    <Chart chartData={chartGoal} amount={leftToSpend} title="Monthly Goal" text="Left Funds" />
+                    <Chart chartData={chartGoal} amount={leftToSpend} title="Monthly Goal" text="Left Funds" currency={currency}/>
                   )}
 
                   {visibleMonthlyBudget && (
-                    <Chart chartData={chartBudget} amount={budgetSpendings} title={`Monthly Budget: ${budget} ${currency}`} text="Left Budget" />
+                    <Chart chartData={chartBudget} amount={budgetSpendings} title={`Monthly Budget: ${budget} ${currency}`} text="Left Budget" currency={currency}/>
                   )}
                 </View>
 
@@ -85,6 +85,7 @@ export default function HomeScreen({ navigation }) {
             }
             renderItem={({ item }) => (
               <ExpenseItem
+                date={item.date.replace(/^\d{4}-/, "")}
                 title={item.category}
                 amount={item.amount.toString()}
                 currency={currency || ''}

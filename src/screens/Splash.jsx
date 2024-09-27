@@ -1,4 +1,4 @@
-import { StyleSheet, View,Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import splashAnimation from "../../assets/animations/splash.json";
 import LottieView from "lottie-react-native";

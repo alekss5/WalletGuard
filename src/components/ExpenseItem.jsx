@@ -11,12 +11,12 @@ export default function ExpenseItem({ date, title, currency, amount, onDelete })
     <View>
       <View style={styles.expenseItem}>
         <View style={styles.itemLeft}>
-          {date && <Text style={[styles.currencyText, { color: colors.text }]}>{date}   </Text>}
           <Image source={ImageSource.getImageSource(title.icon)} style={styles.icon} />
           <Text style={[styles.itemText, { color: colors.text }]}>{title.description}</Text>
         </View>
 
         <View style={styles.itemRight}>
+          {date && <Text style={{ color: colors.subtext, fontSize: 15 }}>{date}   </Text>}
           <Text style={[styles.currencyText, { color: colors.text }]}>{currency}</Text>
           <Text style={[styles.amountText, { color: colors.text }]}>{amount}</Text>
           {onDelete && (

@@ -5,7 +5,7 @@ export const scheduleDailyNotification = async () => {
     content: {
       title: "Daily Reminder",
       body: "Did you entered your expenses for the day?",
-      sound:'notification_sound.mp3',
+      // sound:'notification_sound.mp3',
     },
     trigger: {
       hour: 19,
@@ -20,7 +20,7 @@ export const scheduleDailyBudgetNotification = async () => {
     content: {
       title: "You are Over Budget",
       body: "You've exceeded your daily budget. Review your spending to get back on track.",
-      sound:'notification_sound.mp3',
+      // sound:'notification_sound.mp3',
     },
     trigger: {
       hour: 13,
@@ -43,7 +43,7 @@ export const scheduleMultipleWeeklyNotifications = async () => {
       content: {
         title: "Are you ready for the day?",
         body: `Check out how much you have left to spend.`,
-        sound:'notification_sound.mp3',
+        // sound:'notification_sound.mp3',
       },
       trigger: {
         hour: 10,     

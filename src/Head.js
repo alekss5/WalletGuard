@@ -3,33 +3,35 @@ import { Alert, StyleSheet, View } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { lightTheme } from './themes/lightTheme';
 import { darkTheme } from './themes/darkTheme';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { initializeUIFromRealm, initializeUIState, selectTheme, setLastDateIn } from './redux/uiReducer';
-import StackNavigation from './navigation/StackNavigation';
 import { useEffect, useState } from 'react';
-import Animated, { FadeIn } from "react-native-reanimated";
+import Animated, { FadeIn } from 'react-native-reanimated';
+
 import Splash from './screens/Splash';
-import { fetchBudgetDataFromRealm, fetchUIStateFromRealm } from './realm/realmInstance';
-import { initializePersonalInfoFromRealm, selectIsPassSetup, selectSalary } from './redux/personalInfReducer';
-import { addExpense, initializeBudgetFromRealm, resetBudgetData, updateSubscriptionDate } from './redux/budgetReducer';
+import StackNavigation from './navigation/StackNavigation';
+import { selectTheme,selectUIState } from './redux/selectors/ui';
+import { setLastDateIn } from './redux/uiReducer';
 import { requestNotificationPermission } from './notifications/Service';
 import { clearNotifications, scheduleDailyBudgetNotification, scheduleDailyNotification, scheduleMultipleWeeklyNotifications } from './notifications/Scheduler';
-import { isSubscriptionDue,isOneMonthPassed } from './utils/GlobalFunctions';
+import { isSubscriptionDue, isOneMonthPassed } from './utils/GlobalFunctions';
+import { selectIsPassSetup,selectSalary } from './redux/selectors/personalInf';
+import { selectBudgetState } from './redux/selectors/budget';
+
 export default function Head() {
-  const isDarkTheme = useSelector(selectTheme)
-  const dispatch = useDispatch()
-  const passTheSetup = useSelector(selectIsPassSetup)
-  const salary = useSelector(selectSalary)
+  const isDarkTheme = useSelector(selectTheme);
+  const passTheSetup = useSelector(selectIsPassSetup);
+  const salary = useSelector(selectSalary);
+  const uiState = useSelector(selectUIState);
+  const budgetState  = useSelector(selectBudgetState)
+  
+  const dispatch = useDispatch();
   const [isSplashActive, setSplashActive] = useState(false);
   const theme = isDarkTheme ? darkTheme : lightTheme;
+  let statusBarColor = isDarkTheme ? 'light' : 'dark';
 
-  let statusBarColor = isDarkTheme ? "light" : "dark";
-
-  const setupNotifications = async (uiState, budgetData) => {
+  const setupNotifications = async (budgetData) => {
     const permissionGranted = await requestNotificationPermission();
     if (!permissionGranted) return;
-
     const { budget, total } = budgetData;
     clearNotifications();
 
@@ -51,13 +53,15 @@ export default function Head() {
       category: subscription.type,
       date: formattedDate,
     }));
-    dispatch(updateSubscriptionDate({day:subscription.day,typeDescription:subscription.type.description,date:formattedDate}))
-
+    dispatch(updateSubscriptionDate({
+      day: subscription.day,
+      typeDescription: subscription.type.description,
+      date: formattedDate,
+    }));
   }
 
   function checkSubscriptions(subscriptions, lastLogin) {
     subscriptions?.forEach(subscription => {
-      
       if (isSubscriptionDue(subscription, lastLogin)) {
         addSubscriptionAsExpense(subscription);
       }
@@ -65,35 +69,19 @@ export default function Head() {
   }
 
   const loadInitialState = async () => {
-    const uiStateFromRealm = await fetchUIStateFromRealm();
-    const budgetData = await fetchBudgetDataFromRealm();
+    const { lastDateIn } = uiState || {};
+    const { subscriptionsArray: subscriptions, startDate } = budgetState ;
 
-    const subscriptions = budgetData?.subscriptionsArray
-    const lastDateIn = uiStateFromRealm?.lastDateIn;
-    const startDate = budgetData?.startDate
 
-    if (uiStateFromRealm) {
-      dispatch(initializeUIState(uiStateFromRealm));
-    } else {
-      dispatch(initializeUIFromRealm(uiStateFromRealm));
-    }
-
-    dispatch(initializePersonalInfoFromRealm());
-    dispatch(initializeBudgetFromRealm(budgetData));
-
-    if (isOneMonthPassed(lastDateIn, startDate) === true) {
-      Alert.alert(
-        "Balance Refreshed",
-        "The total balance has been refreshed!",
-        [{ text: "OK" }]
-      );
-      dispatch(resetBudgetData({ salary }))
+    if (isOneMonthPassed(lastDateIn, startDate)) {
+      Alert.alert("Balance Refreshed", "The total balance has been refreshed!", [{ text: "OK" }]);
+      dispatch(resetBudgetData({ salary }));
     }
 
     checkSubscriptions(subscriptions, lastDateIn);
+    dispatch(setLastDateIn());
 
-    dispatch(setLastDateIn())
-    await setupNotifications(uiStateFromRealm, budgetData);
+    await setupNotifications(budgetState);
   };
 
   useEffect(() => {

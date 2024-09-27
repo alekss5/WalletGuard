@@ -1,10 +1,11 @@
 import { ScrollView, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectStartDate, setStartDate } from '../../redux/budgetReducer';
+import {  setStartDate } from '../../redux/budgetReducer';
 import CustomText from '../../components/UI/CustomText';
 import BackgroundColorContainer from '../../components/UI/BackgroundColorContainer';
 import { useTheme } from 'react-native-paper';
+import { selectStartDate } from '../../redux/selectors/budget';
 
 const useDays = (startDate, handlePress, colors) => {
   return useMemo(() => {

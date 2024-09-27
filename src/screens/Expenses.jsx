@@ -5,10 +5,11 @@ import { useTheme } from 'react-native-paper';
 import ExpenseItem from '../components/ExpenseItem';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteExpense, selectBudgetData, selectExpensesArray } from '../redux/budgetReducer';
+import { deleteExpense } from '../redux/budgetReducer';
 import CustomDivider from '../components/UI/CustomDivider';
 import BackgroundColorContainer from '../components/UI/BackgroundColorContainer';
 import MonthYearPicker from '../components/UI/MonthYearPicker';
+import { selectBudgetData, selectExpensesArray } from '../redux/selectors/budget';
 
 
 export default function Expenses() {
@@ -116,6 +117,7 @@ export default function Expenses() {
                         data={filteredExpenses}
                         renderItem={({ item }) => (
                             <ExpenseItem
+                                date={item.date.replace(/^\d{4}-/, "")}
                                 title={item.category}
                                 amount={item.amount.toString()}
                                 currency={currency || ''}
@@ -164,7 +166,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
     listContainer: {
-        paddingHorizontal: 20,
+      
         paddingTop: 10,
     },
     noExpensesText: {

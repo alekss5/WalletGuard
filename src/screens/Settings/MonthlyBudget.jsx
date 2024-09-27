@@ -2,14 +2,16 @@ import { useState } from 'react';
 import { StyleSheet, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectSalary, setSalary } from '../../redux/personalInfReducer';
-import { selectBudget, setBudget } from '../../redux/budgetReducer';
+import {  setSalary } from '../../redux/personalInfReducer';
+import { setBudget } from '../../redux/budgetReducer';
 
 import CustomInput from '../../components/UI/CustomInput';
 import BackgroundColorContainer from '../../components/UI/BackgroundColorContainer';
 import CustomText from '../../components/UI/CustomText';
 import SubmitButton from '../../components/UI/SubmitButton';
 import DoneAnimation from '../../components/UI/DoneAnimation';
+import { selectSalary } from '../../redux/selectors/personalInf';
+import { selectBudget } from '../../redux/selectors/budget';
 
 export default function MonthlyBudget() {
   const { colors } = useTheme();

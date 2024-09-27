@@ -3,7 +3,7 @@ import { StyleSheet, View, FlatList, Image,Alert } from 'react-native';
 import {  useTheme } from 'react-native-paper';
 import { useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { addSubscription, deleteSubscription, selectCurrency, selectSubscriptions } from '../../redux/budgetReducer';
+import { addSubscription, deleteSubscription, } from '../../redux/budgetReducer';
 import ImageSource from '../../utils/ImageSources';
 import BackgroundColorContainer from '../../components/UI/BackgroundColorContainer';
 import CustomText from '../../components/UI/CustomText';
@@ -13,6 +13,7 @@ import SubmitButton from '../../components/UI/SubmitButton';
 import ExpenseItem from '../../components/ExpenseItem';
 import CustomInput from '../../components/UI/CustomInput';
 import DoneAnimation from '../../components/UI/DoneAnimation';
+import { selectCurrency, selectSubscriptions } from '../../redux/selectors/budget';
 
 export default function Subscriptions({ navigation }) {
   const route = useRoute();

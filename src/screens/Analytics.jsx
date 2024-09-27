@@ -2,12 +2,12 @@ import { StyleSheet, Text, Dimensions, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { LineChart, PieChart, BarChart } from 'react-native-chart-kit'
 import { useSelector } from 'react-redux'
-import { selectExpensesArray, selectMonthlyIncome } from '../redux/budgetReducer'
 import BackgroundColorContainer from '../components/UI/BackgroundColorContainer'
 import BackgroundImageContainer from '../components/UI/BackgroundImageContainer'
 import { useTheme } from 'react-native-paper'
 import CustomText from '../components/UI/CustomText'
 import { categoryColors,getWeekNumber,isCurrentMonth } from '../utils/GlobalFunctions'
+import { selectExpensesArray, selectMonthlyIncome } from '../redux/selectors/budget'
 
 const Analytics = () => {
   const expenses = useSelector(selectExpensesArray)

@@ -3,7 +3,7 @@ import { StyleSheet, Image, Platform, View, TouchableOpacity, TouchableWithoutFe
 import { useTheme } from 'react-native-paper';
 import { useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { addExpense, addIncome, selectSubscriptions } from '../redux/budgetReducer';
+import { addExpense, addIncome } from '../redux/budgetReducer';
 import ImageSource from '../utils/ImageSources';
 import BackgroundColorContainer from '../components/UI/BackgroundColorContainer';
 import BackgroundImageContainer from '../components/UI/BackgroundImageContainer';
@@ -15,6 +15,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { lightVibration } from '../utils/vibrationPaterns';
 import CustomInput from '../components/UI/CustomInput';
 import DoneAnimation from '../components/UI/DoneAnimation';
+import { selectSubscriptions } from '../redux/selectors/budget';
 
 const MemoizedCustomText = React.memo(CustomText);
 const MemoizedCustomButton = React.memo(CustomButton);
