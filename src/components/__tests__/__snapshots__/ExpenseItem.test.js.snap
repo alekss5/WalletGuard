@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExpenseItem Component matches the snapshot 1`] = `
+<View>
+  <View
+    style={
+      {
+        "alignSelf": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingBottom": 2,
+        "width": "90%",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+        }
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#000",
+            },
+            {
+              "fontSize": 18,
+            },
+          ]
+        }
+      >
+        30
+      </Text>
+      <Image
+        source={null}
+        style={
+          {
+            "height": 35,
+            "width": 35,
+          }
+        }
+        testID="expense-icon"
+      />
+      <Text
+        style={
+          [
+            {
+              "fontSize": 18,
+              "paddingHorizontal": 10,
+            },
+            {
+              "color": "#000",
+            },
+          ]
+        }
+      >
+        Shopping
+      </Text>
+    </View>
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            {
+              "color": "#666",
+              "fontSize": 15,
+              "paddingRight": "5%",
+            }
+          }
+        >
+          2024-09-30
+        </Text>
+      </View>
+      <Text
+        style={
+          [
+            {
+              "fontSize": 18,
+            },
+            {
+              "color": "#000",
+            },
+          ]
+        }
+      >
+        USD
+      </Text>
+      <Text
+        style={
+          [
+            {
+              "fontSize": 18,
+              "paddingLeft": 5,
+            },
+            {
+              "color": "#000",
+            },
+          ]
+        }
+      >
+        100.00
+      </Text>
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+            "paddingLeft": 10,
+          }
+        }
+        testID="delete-button"
+      >
+        <AntDesign
+          color="#000"
+          name="delete"
+          size={27}
+        />
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "rgba(0, 0, 0, 0.12)",
+          "height": 0.5,
+        },
+        undefined,
+        undefined,
+        undefined,
+        {
+          "alignSelf": "center",
+          "backgroundColor": "#ccc",
+          "height": 2,
+          "marginBottom": 10,
+          "marginVertical": 10,
+          "width": "90%",
+        },
+      ]
+    }
+  />
+</View>
+`;

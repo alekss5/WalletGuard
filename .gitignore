@@ -33,3 +33,9 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+#test ignores
+default.realm
+default.realm.lock
+default.realm.note
+coverage
+default.realm.management

@@ -1,9 +1,6 @@
 import * as Notifications from 'expo-notifications';
 import { Alert, Platform } from 'react-native';
 
-
-
-
 export async function requestNotificationPermission() {
   let granted = false;
 

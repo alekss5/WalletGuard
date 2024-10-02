@@ -8,6 +8,14 @@ const initialState = {
   salary: '',
   jobSector: '',
   passTheSetup: false,
+ // isPremium:true,
+//  premiumExpiresAt: null,
+//premiumAutoRenew:false,
+//subscriptionType: '', //year or month
+//cardNumber:'',
+//cardExpireDate:'',
+//email:'',
+
 };
 
 export const initializePersonalInfo = initializeFromRealm(

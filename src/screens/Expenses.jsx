@@ -116,6 +116,7 @@ export default function Expenses() {
                     <FlatList
                         data={filteredExpenses}
                         renderItem={({ item }) => (
+                         
                             <ExpenseItem
                                 date={item.date.replace(/^\d{4}-/, "")}
                                 title={item.category}

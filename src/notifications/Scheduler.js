@@ -58,6 +58,21 @@ export const scheduleMultipleWeeklyNotifications = async () => {
   // console.log('Scheduled notifications:', notifications);
 };
 
+export const scheduleMonthlyRefreshNotification = async (dayOfMonth) => {
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title: "Monthly Budget",
+      body: "Your budget has been refreshed! Check how much you have to spend.",
+      // sound: 'notification_sound.mp3',
+    },
+    trigger: {
+      day: dayOfMonth, 
+      hour: 8,          
+      minute: 0,
+      repeats: true,  
+    },
+  });
+};
 
 
 export const clearNotifications = async () => {

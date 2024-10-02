@@ -1,7 +1,6 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useTheme } from 'react-native-paper';
-import CustomText from './CustomText';
 
 const months = [
     { label: 'January', value: 0 },

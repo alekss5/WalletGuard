@@ -12,7 +12,7 @@ import StackNavigation from './navigation/StackNavigation';
 import { selectTheme,selectUIState } from './redux/selectors/ui';
 import { setLastDateIn } from './redux/uiReducer';
 import { requestNotificationPermission } from './notifications/Service';
-import { clearNotifications, scheduleDailyBudgetNotification, scheduleDailyNotification, scheduleMultipleWeeklyNotifications } from './notifications/Scheduler';
+import { clearNotifications, scheduleDailyBudgetNotification, scheduleDailyNotification, scheduleMonthlyNotification, scheduleMonthlyRefreshNotification, scheduleMultipleWeeklyNotifications } from './notifications/Scheduler';
 import { isSubscriptionDue, isOneMonthPassed } from './utils/GlobalFunctions';
 import { selectIsPassSetup,selectSalary } from './redux/selectors/personalInf';
 import { selectBudgetState } from './redux/selectors/budget';
@@ -32,7 +32,7 @@ export default function Head() {
   const setupNotifications = async (budgetData) => {
     const permissionGranted = await requestNotificationPermission();
     if (!permissionGranted) return;
-    const { budget, total } = budgetData;
+    const { budget, total, startDate } = budgetData;
     clearNotifications();
 
     if (uiState.overBudgetNotification && budget > total) {
@@ -43,6 +43,9 @@ export default function Head() {
     }
     if (uiState.weeklyNotification) {
       scheduleMultipleWeeklyNotifications();
+    }
+    if(uiState.monthlyRefreshNotification){
+      scheduleMonthlyRefreshNotification(startDate)
     }
   };
 

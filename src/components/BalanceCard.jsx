@@ -2,6 +2,7 @@ import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native
 import { Entypo } from '@expo/vector-icons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import background from '../../assets/m.jpg';
+import CustomText from './UI/CustomText';
 
 export default function BalanceCard({ onPress, visibleIncome, total, expense, income, currency, colors }) {
     const totalColor = total < 0 ? colors.error : colors.success;
@@ -28,7 +29,7 @@ export default function BalanceCard({ onPress, visibleIncome, total, expense, in
                                     <Text style={[styles.currency, { color: totalColor }]}>{currency}</Text>
                                 </>
                             ) : (
-                                <Text style={styles.totalBalanceText}>Hidden</Text>
+                                <CustomText style={styles.totalBalanceText}>Hidden</CustomText>
                             )}
                         </View>
 
@@ -48,7 +49,7 @@ export default function BalanceCard({ onPress, visibleIncome, total, expense, in
                                     {!visibleIncome ? (
                                         <Text style={[styles.amount, { color: colors.success }]}>{currency} {income}</Text>
                                     ) : (
-                                        <Text style={styles.amount}>Hidden</Text>
+                                        <CustomText style={styles.amount}>Hidden</CustomText>
                                     )}
                                 </View>
                             </View>

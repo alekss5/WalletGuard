@@ -1,16 +1,16 @@
 import { Pressable, StyleSheet, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import  Ionicons  from '@expo/vector-icons/Ionicons';
 import { Divider, Switch, useTheme } from 'react-native-paper';
 import CustomText from './UI/CustomText';
 
-export default function SettingsItem({ onPress, icon, text, isSwitchOn, onToggleSwitch }) {
+export default function SettingsItem({ onPress, icon, text, isSwitchOn, onToggleSwitch,accessibilityLabel }) {
   const { colors } = useTheme();
 
   return (
-    <Pressable onPress={onPress} style={styles.pressable}>
+    <Pressable onPress={onPress} style={styles.pressable} accessibilityLabel={accessibilityLabel}>
       <View style={styles.content}>
         <View style={styles.pressableContent}>
-          <Ionicons name={icon} size={30} color={colors.text} style={styles.icon} />
+          <Ionicons name={icon} size={30} color={colors.text} style={styles.icon} testID="settings-icon"/>
           <CustomText style={styles.pressableText}>{text}</CustomText>
         </View>
         {onToggleSwitch && (

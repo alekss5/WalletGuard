@@ -130,7 +130,7 @@ export default function Subscriptions({ navigation }) {
   renderItem={({ item }) => (
     <View style={{ flex: 1 }}>
       <ExpenseItem
-        date={item.day}
+        dayNumber={item.day}
         title={item.type}
         currency={currency}
         amount={item.amount}
