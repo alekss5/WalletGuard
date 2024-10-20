@@ -1,5 +1,4 @@
 import { StyleSheet, View } from "react-native";
-
 import splashAnimation from "../../assets/animations/splash.json";
 import LottieView from "lottie-react-native";
 import Animated, { ZoomOut } from "react-native-reanimated";
@@ -16,6 +15,7 @@ export default function Splash() {
         autoPlay
         loop={true}
         style={styles.animation}
+        testID="lottie-view"
       />
     </View>
   );

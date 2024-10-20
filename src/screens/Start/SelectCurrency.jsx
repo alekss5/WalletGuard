@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { View, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import currencyCodes from 'currency-codes';
 import LottieView from "lottie-react-native";
 
@@ -48,7 +48,8 @@ const SelectCurrency = ({ navigation }) => {
             }
         }
         else{
-            alert("Please select your currency.");
+           Alert.alert("Please select your currency.");
+      
         }
     };
 

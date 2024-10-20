@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import SettingsItem from '../SettingsItem';
 import { ThemeProvider } from 'react-native-paper';
-import {lightTheme} from '../../themes/lightTheme'; // adjust this based on your project
+import {lightTheme} from '../../themes/lightTheme';
 
 describe('SettingsItem Component', () => {
     it('renders correctly with all props', () => {
@@ -14,15 +14,13 @@ describe('SettingsItem Component', () => {
             isSwitchOn={false}
             onToggleSwitch={jest.fn()}
             onPress={jest.fn()}
-            accessibilityLabel="Settings Item" // Add accessibilityLabel here
+            accessibilityLabel="Settings Item"
           />
         </ThemeProvider>
       );
   
-      // Check if the text is rendered
       expect(getByText('Settings')).toBeTruthy();
   
-      // Check if the icon is rendered (using the testID for Ionicons)
       expect(getByTestId('settings-icon')).toBeTruthy();
     });
   
@@ -37,15 +35,13 @@ describe('SettingsItem Component', () => {
             isSwitchOn={false}
             onToggleSwitch={jest.fn()}
             onPress={onPressMock}
-            accessibilityLabel="Settings Item" // Add accessibilityLabel here
+            accessibilityLabel="Settings Item"
           />
         </ThemeProvider>
       );
   
-      // Simulate a press on the Pressable component
       fireEvent.press(getByText('Settings'));
   
-      // Check if onPress was called
       expect(onPressMock).toHaveBeenCalled();
     });
   
@@ -64,11 +60,9 @@ describe('SettingsItem Component', () => {
         </ThemeProvider>
       );
   
-      // Simulate a toggle of the Switch component
       const switchComponent = getByRole('switch');
       fireEvent(switchComponent, 'onValueChange');
   
-      // Check if onToggleSwitch was called
       expect(onToggleSwitchMock).toHaveBeenCalled();
     });
   
@@ -81,16 +75,14 @@ describe('SettingsItem Component', () => {
             isSwitchOn={false}
             onToggleSwitch={jest.fn()}
             onPress={jest.fn()}
-            accessibilityLabel="Settings Item" // Add accessibilityLabel here
+            accessibilityLabel="Settings Item"
           />
         </ThemeProvider>
       );
   
-      // Check if the switch is off initially
       const switchComponent = getByRole('switch');
-      expect(switchComponent.props.value).toBe(false); // Check the value directly
+      expect(switchComponent.props.value).toBe(false);
   
-      // Re-render with switch on
       rerender(
         <ThemeProvider theme={lightTheme}>
           <SettingsItem
@@ -99,13 +91,11 @@ describe('SettingsItem Component', () => {
             isSwitchOn={true}
             onToggleSwitch={jest.fn()}
             onPress={jest.fn()}
-            accessibilityLabel="Settings Item" // Add accessibilityLabel here
+            accessibilityLabel="Settings Item" 
           />
         </ThemeProvider>
       );
-  
-      // Check if the switch is on
-      expect(getByRole('switch').props.value).toBe(true); // Check the value directly
+      expect(getByRole('switch').props.value).toBe(true);
     });
   
     it('does not render a switch when onToggleSwitch is not provided', () => {
@@ -116,12 +106,11 @@ describe('SettingsItem Component', () => {
             text="Settings"
             isSwitchOn={false}
             onPress={jest.fn()}
-            accessibilityLabel="Settings Item" // Add accessibilityLabel here
+            accessibilityLabel="Settings Item" 
           />
         </ThemeProvider>
       );
   
-      // Check that the switch is not rendered
       expect(queryByRole('switch')).toBeNull();
     });
   
@@ -134,13 +123,12 @@ describe('SettingsItem Component', () => {
             isSwitchOn={false}
             onToggleSwitch={jest.fn()}
             onPress={jest.fn()}
-            accessibilityLabel="Settings Item" // Add accessibilityLabel here
+            accessibilityLabel="Settings Item" 
           />
         </ThemeProvider>
       );
   
-      // Check if the icon is rendered
-      expect(getByTestId('settings-icon')).toBeTruthy(); // Ensure to assign a testID in the SettingsItem component for the icon
+      expect(getByTestId('settings-icon')).toBeTruthy();
     });
     
     it('has the correct accessibility label', () => {
@@ -152,12 +140,11 @@ describe('SettingsItem Component', () => {
               isSwitchOn={false}
               onToggleSwitch={jest.fn()}
               onPress={jest.fn()}
-              accessibilityLabel="Settings Item" // Ensure this is set in the component
+              accessibilityLabel="Settings Item"
             />
           </ThemeProvider>
         );
-      
-        // Check if the accessibility label is correctly set
+
         expect(getByLabelText('Settings Item')).toBeTruthy();
       });
       
@@ -171,16 +158,15 @@ describe('SettingsItem Component', () => {
             isSwitchOn={false}
             onToggleSwitch={jest.fn()}
             onPress={jest.fn()}
-            accessibilityLabel="Settings Item" // Add accessibilityLabel here
+            accessibilityLabel="Settings Item"
           />
         </ThemeProvider>
       );
   
       const settingsText = getByText('Settings');
   
-      // Check if the text has the expected styles
       expect(settingsText.props.style).toEqual(
-        expect.arrayContaining([{ color: lightTheme.colors.text }]) // Check if the text color is correct
+        expect.arrayContaining([{ color: lightTheme.colors.text }]) 
       );
     });
-  });
+  })

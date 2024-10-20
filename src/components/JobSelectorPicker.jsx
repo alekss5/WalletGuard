@@ -8,6 +8,7 @@ export default function JobSectorPicker({ selectedValue, onValueChange }) {
                 selectedValue={selectedValue}
                 onValueChange={(itemValue) => onValueChange(itemValue)}
                 style={styles.picker}
+                testID="jobSectorPicker"
             >
                 <Picker.Item label="Select a job sector" value="empty" />
                 <Picker.Item label="Technology" value="technology" />

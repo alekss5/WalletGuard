@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { StyleSheet, View, TouchableWithoutFeedback, Keyboard,Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "react-native-paper";
 import LottieView from "lottie-react-native";
@@ -23,21 +23,21 @@ export default function Salary({ navigation }) {
     const handleContinue = () => {
         const trimmedSalary = salary.trim();
         const selectedSalary = parseFloat(trimmedSalary);
-    
+   
         if (trimmedSalary.length === 0) {
-            alert("Please enter your monthly income.");
+           Alert.alert("Please enter your monthly income.");
             return;
         }
     
         if (isNaN(selectedSalary) || selectedSalary === 0) {
-            alert("Please enter your real salary.");
+            Alert.alert("Please enter your real salary.");
             return;
         }
-    
-        if (jobSector === "empty") {
-            alert("Please select your job sector.");
+        if (!jobSector || jobSector === "empty") {
+            Alert.alert("Please select your job sector.");
             return;
         }
+       
         dispatch(setTotal({salary:trimmedSalary}))
     
         dispatch(setJobInformation({ salary: selectedSalary, jobSector: jobSector }));

@@ -15,7 +15,6 @@ describe('CustomText', () => {
 
     const textComponent = getByText('Sample Text');
     
-    // Check if the text color matches the theme's color
     expect(textComponent.props.style).toEqual(
       expect.arrayContaining([{ color: lightTheme.colors.text }])
     );
@@ -32,7 +31,6 @@ describe('CustomText', () => {
 
     const textComponent = getByText('Styled Text');
     
-    // Check if the custom styles and theme color are applied
     expect(textComponent.props.style).toEqual(
       expect.arrayContaining([{ color: lightTheme.colors.text }, customStyle])
     );

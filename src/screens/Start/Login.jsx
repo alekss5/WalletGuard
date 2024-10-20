@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Keyboard, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, View, Keyboard, TouchableWithoutFeedback,Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LottieView from "lottie-react-native";
 
@@ -22,22 +22,22 @@ export default function Login({ navigation }) {
         const parsedAge = parseInt(trimmedAge, 10);
     
         if (trimmedName.length === 0) {
-            alert("Please enter your name.");
+            Alert.alert("Please enter your name.");
             return;
         }
     
         if (trimmedAge.length === 0) {
-            alert("Please enter your age.");
+            Alert.alert("Please enter your age.");
             return;
         }
         
         if (parsedAge >= 99) {
-            alert('Wow is this your real age?');
+            Alert.alert('Wow is this your real age?');
             return;
         }
     
         if (isNaN(parsedAge) || parsedAge <= 0) {
-            alert("Please enter a valid age.");
+            Alert.alert("Please enter a valid age.");
             return;
         }
     

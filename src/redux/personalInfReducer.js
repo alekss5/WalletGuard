@@ -8,20 +8,19 @@ const initialState = {
   salary: '',
   jobSector: '',
   passTheSetup: false,
- // isPremium:true,
-//  premiumExpiresAt: null,
-//premiumAutoRenew:false,
-//subscriptionType: '', //year or month
-//cardNumber:'',
-//cardExpireDate:'',
-//email:'',
-
+  // isPremium:true,
+  //  premiumExpiresAt: null,
+  //premiumAutoRenew:false,
+  //subscriptionType: '', //year or month
+  //cardNumber:'',
+  //cardExpireDate:'',
+  //email:'',
 };
 
 export const initializePersonalInfo = initializeFromRealm(
   "personalInfo",
-  fetchPersonalInfoFromRealm, 
-  initialState 
+  fetchPersonalInfoFromRealm,
+  initialState
 );
 
 const personalInfoSlice = createSlice({
@@ -45,7 +44,7 @@ const personalInfoSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(initializePersonalInfo.fulfilled, (state, action) => {
-      return action.payload; 
+      return action.payload;
     });
   },
 });
