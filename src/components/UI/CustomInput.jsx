@@ -21,6 +21,7 @@ export default function CustomInput({
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
         autoCorrect={autoCorrect}
+        
         spellCheck={false}
         blurOnSubmit={true}
         placeholderTextColor={colors.subtext}

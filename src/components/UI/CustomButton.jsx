@@ -2,11 +2,12 @@ import { TouchableOpacity, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
-export default function CustomButton({ onPress, children, style, icon, textStyle, testID }) {
+export default function CustomButton({ onPress, children, style, icon, textStyle, testID,disabled }) {
     const { colors } = useTheme();
 
     return (
         <TouchableOpacity
+        disabled={disabled}
             onPress={onPress}
             style={[{
                 backgroundColor: colors.surface,

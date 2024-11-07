@@ -13,6 +13,15 @@ export const fetchPersonalInfoFromRealm = () => {
     salary: personalInfo.salary,
     jobSector: personalInfo.jobSector,
     passTheSetup: personalInfo.passTheSetup,
+    isPremium: personalInfo.isPremium,
+    premiumExpiresAt: personalInfo.premiumExpiresAt,
+    premiumAutoRenew: personalInfo.premiumAutoRenew,
+    subscriptionType: personalInfo.subscriptionType,
+    cardNumber: personalInfo.cardNumber,
+    cardExpireDate: personalInfo.cardExpireDate,
+    email: personalInfo.email,
+    joinedDate: personalInfo.joinedDate,
+    jsonToken:personalInfo.jsonToken,
   };
 };
 

@@ -48,6 +48,16 @@ export default function StackNavigation({ isUser }) {
                       }}
                   />
                 )}
+                              
+                              <Stack.Screen
+                    name="Upgrade"
+                    component={Upgrade}
+                    options={{
+                        headerShown: false,
+                        headerBackTitle: 'Home',
+                    }}
+                />
+
                 <Stack.Screen
                     name="BottomTabs"
                     component={BottomTabsNavigation}
@@ -65,16 +75,7 @@ export default function StackNavigation({ isUser }) {
                         headerBackTitle: 'Expenses',
                     }}
                 />
-                
-                <Stack.Screen
-                    name="Upgrade"
-                    component={Upgrade}
-                    options={{
-                        headerShown: false,
-                        headerBackTitle: 'Home',
-                    }}
-                />
-
+  
                 <Stack.Screen
                     name="ExpenseTypes"
                     component={ExpenseTypes}

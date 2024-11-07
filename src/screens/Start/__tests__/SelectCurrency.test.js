@@ -7,8 +7,6 @@ import { setCurrency } from '../../../redux/budgetReducer';
 import { lightTheme } from '../../../themes/lightTheme';
 import { Alert } from 'react-native';
 
-
-
 describe('SelectCurrency Component', () => {
     const mockDispatch = jest.fn();
     const mockNavigate = jest.fn();

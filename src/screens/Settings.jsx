@@ -26,13 +26,16 @@ export default function Settings({ navigation }) {
         navigation.navigate('CommingSoon');
 
     }
+    const logOut = () => {
+
+    }
 
     return (
         <BackgroundColorContainer>
             <BackgroundImageContainer>
                 <View style={styles.container}>
                     <CustomButton
-                        onPress={() => handleNavigation('CommingSoon')}
+                        onPress={() => handleNavigation('Upgrade')}
                         style={styles.upgradeButton}
                         textStyle={styles.upgradeButtonText}
                     >
@@ -56,8 +59,11 @@ export default function Settings({ navigation }) {
                             <SettingsItem onPress={navigateToInstagram} icon="logo-instagram" text="Instagram" />
                         </Section>
                         <Section title="Account">
-                            <SettingsItem onPress={() => handleNavigation('CommingSoon')} icon="create-outline" text="Create account" />
-                            <SettingsItem onPress={() => handleNavigation('CommingSoon')} icon="log-in-outline" text="Log in" />
+                            <SettingsItem onPress={() => handleNavigation('Register')} icon="create-outline" text="Create account" />
+                            <SettingsItem onPress={() => handleNavigation('Login')} icon="log-in-outline" text="Log in" />
+                            <SettingsItem onPress={logOut} icon="log-out-outline" text="Log out" />
+
+
                         </Section>
                     </ScrollView>
                 </View>

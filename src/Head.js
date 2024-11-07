@@ -9,21 +9,23 @@ import Animated, { FadeIn } from 'react-native-reanimated';
 
 import Splash from './screens/Splash';
 import StackNavigation from './navigation/StackNavigation';
-import { selectTheme,selectUIState } from './redux/selectors/ui';
+import { selectTheme, selectUIState } from './redux/selectors/ui';
 import { setLastDateIn } from './redux/uiReducer';
 import { requestNotificationPermission } from './notifications/Service';
 import { clearNotifications, scheduleDailyBudgetNotification, scheduleDailyNotification, scheduleMonthlyRefreshNotification, scheduleMultipleWeeklyNotifications } from './notifications/Scheduler';
 import { isSubscriptionDue, isOneMonthPassed } from './utils/GlobalFunctions';
-import { selectIsPassSetup,selectSalary } from './redux/selectors/personalInf';
+import { selectIsPassSetup, selectJsonToken, selectSalary } from './redux/selectors/personalInf';
 import { selectBudgetState } from './redux/selectors/budget';
+import { postLoginUser, putRegisterUser } from './utils/https';
+import { setToken } from './redux/personalInfReducer';
 
 export default function Head() {
   const isDarkTheme = useSelector(selectTheme);
   const passTheSetup = useSelector(selectIsPassSetup);
   const salary = useSelector(selectSalary);
   const uiState = useSelector(selectUIState);
-  const budgetState  = useSelector(selectBudgetState)
-  
+  const budgetState = useSelector(selectBudgetState)
+  const jestToken = useSelector(selectJsonToken);
   const dispatch = useDispatch();
   const [isSplashActive, setSplashActive] = useState(false);
   const theme = isDarkTheme ? darkTheme : lightTheme;
@@ -44,7 +46,7 @@ export default function Head() {
     if (uiState.weeklyNotification) {
       scheduleMultipleWeeklyNotifications();
     }
-    if(uiState.monthlyRefreshNotification){
+    if (uiState.monthlyRefreshNotification) {
       scheduleMonthlyRefreshNotification(startDate)
     }
   };
@@ -73,7 +75,7 @@ export default function Head() {
 
   const loadInitialState = async () => {
     const { lastDateIn } = uiState || {};
-    const { subscriptionsArray: subscriptions, startDate } = budgetState ;
+    const { subscriptionsArray: subscriptions, startDate } = budgetState;
 
 
     if (isOneMonthPassed(lastDateIn, startDate)) {
@@ -87,9 +89,43 @@ export default function Head() {
     await setupNotifications(budgetState);
   };
 
+  const handleSignup = async () => {
+    try {
+
+      // const user = await putRegisterUser({
+      //   name :"aleksandar",
+      //   age : '23',
+      //   salary : '10000',
+      //   jobSector: 'Healthcare',
+      //   email : 'aleksandarg305@gmail.com',
+      //   password : "5505667Sa",
+      // })
+
+      if (jestToken !== '' && jestToken !== undefined) {
+        return;
+      }
+      else {
+        const user = await postLoginUser({
+          email: 'aleksandarg305@gmail.com',
+          password: "5505667Sa",
+        })
+       //  if (user.status === 201) { //for register
+        if (user.status === 200) {
+          const token = user.data.token;
+          dispatch(setToken(token))
+
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+  };
+
   useEffect(() => {
     loadInitialState();
     setTimeout(() => setSplashActive(true), 1500); // Show splash for 1.5 seconds
+    // handleSignup()
   }, []);
 
   return (

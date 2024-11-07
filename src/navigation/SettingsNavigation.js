@@ -5,11 +5,12 @@ import Privacy from "../screens/Settings/Privacy";
 import StartDate from "../screens/Settings/StartDate";
 import Subscriptions from "../screens/Settings/Subscriptions";
 import MonthlyBudget from "../screens/Settings/MonthlyBudget";
-import CreateAcount from "../screens/Settings/CreateAcount";
+import Register from "../screens/Settings/Register";
 import Settings from "../screens/Settings";
 import CurrencyList from "../screens/Settings/CurrencyList";
 import Notifications from "../screens/Settings/Notifications";
 import PersonalInformation from "../screens/Settings/PersonalInformation";
+import Login from "../screens/Settings/Login";
 
 const SettingsStack = createStackNavigator();
 
@@ -36,7 +37,7 @@ export default function SettingsStackNavigation() {
                     headerShown: false,
                 }}
             />
-              <SettingsStack.Screen
+            <SettingsStack.Screen
                 name="PersonalInformation"
                 component={PersonalInformation}
                 options={{
@@ -48,7 +49,7 @@ export default function SettingsStackNavigation() {
                 component={Theme}
                 title="Theme"
             />
-              <SettingsStack.Screen
+            <SettingsStack.Screen
                 name="Notifications"
                 component={Notifications}
                 title="Notifications"
@@ -61,14 +62,14 @@ export default function SettingsStackNavigation() {
                 name="StartDate"
                 component={StartDate}
                 options={{
-                    headerTitle:'Choose a Start Date',
+                    headerTitle: 'Choose a Start Date',
                 }}
             />
             <SettingsStack.Screen
                 name="CurrencyList"
                 component={CurrencyList}
                 options={{
-                    headerTitle:'Set your Currency',
+                    headerTitle: 'Set your Currency',
                 }}
             />
             <SettingsStack.Screen
@@ -80,8 +81,16 @@ export default function SettingsStackNavigation() {
                 component={MonthlyBudget}
             />
             <SettingsStack.Screen
-                name="CreateAccount"
-                component={CreateAcount}
+                name="Register"
+                component={Register}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <SettingsStack.Screen
+                name='Login'
+                component={Login}
+           
             />
         </SettingsStack.Navigator>
     );
