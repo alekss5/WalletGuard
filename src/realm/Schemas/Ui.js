@@ -7,6 +7,7 @@ export const uiSchema = {
       visibleTotalBalance: { type: "bool", default: false }, 
       visibleMonthlyBudget: { type: "bool", default: false },
       visibleMonthlyGoal: { type: "bool", default: true },
+      visibleExpenseDate: { type: "bool", default: true },
   
       lastDateIn: { type: "string", default: '' },
       dailyNotification: { type: "bool", default: true }, 

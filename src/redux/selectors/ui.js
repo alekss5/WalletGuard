@@ -1,4 +1,3 @@
-// Simple Selectors (without createSelector)
 export const selectTheme = (state) => state.ui.isDarkTheme;
 export const selectVisibleTotalBalance = (state) => state.ui.visibleTotalBalance;
 export const selectVisibleMonthlyBudget = (state) => state.ui.visibleMonthlyBudget;

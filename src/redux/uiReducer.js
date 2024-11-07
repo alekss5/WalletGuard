@@ -6,7 +6,7 @@ const initialState = {
   visibleTotalBalance: false,
   visibleMonthlyBudget: false,
   visibleMonthlyGoal: false,
-  // visibleExpenseDate:true,
+  visibleExpenseDate:true,
   lastDateIn: '',
   dailyNotification: true,
   overBudgetNotification: true,

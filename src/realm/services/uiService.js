@@ -12,6 +12,7 @@ export const fetchUIStateFromRealm = () => {
     visibleTotalBalance: uiData.visibleTotalBalance,
     visibleMonthlyBudget: uiData.visibleMonthlyBudget,
     visibleMonthlyGoal: uiData.visibleMonthlyGoal,
+    visibleExpenseDate:uiData.visibleExpenseDate,
     lastDateIn: uiData.lastDateIn,
     dailyNotification: uiData.dailyNotification,
     overBudgetNotification: uiData.overBudgetNotification,

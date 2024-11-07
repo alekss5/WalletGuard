@@ -33,11 +33,12 @@ export const savePersonalInfoToRealm = (personalInfoState) => {
       jobSector: String(personalInfoState.jobSector || ""),
       passTheSetup: personalInfoState.passTheSetup || false,
       isPremium: personalInfoState.isPremium || true,
-      premiumExpiresAt: personalInfoState.premiumExpiresAt || null, // Make sure this is a date or null
+      premiumExpiresAt: personalInfoState.premiumExpiresAt || null,
       premiumAutoRenew: personalInfoState.premiumAutoRenew || false,
       subscriptionType: String(personalInfoState.subscriptionType || ""),
       email: String(personalInfoState.email || ""),
-      joinedDate: personalInfoState.joinedDate || null, // Ensure this is a valid date or null
+      joinedDate: personalInfoState.joinedDate || null, 
+
       jsonToken: String(personalInfoState.jsonToken || ""),
     };
         

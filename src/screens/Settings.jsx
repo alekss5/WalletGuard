@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { StyleSheet, ScrollView, View,Dimensions } from 'react-native';
+import { StyleSheet, ScrollView, View, Dimensions } from 'react-native';
 
 import SettingsItem from '../components/SettingsItem';
 import BackgroundColorContainer from '../components/UI/BackgroundColorContainer';
@@ -7,10 +7,16 @@ import BackgroundImageContainer from '../components/UI/BackgroundImageContainer'
 import CustomText from '../components/UI/CustomText';
 import CustomButton from '../components/UI/CustomButton';
 import { lightVibration } from '../utils/vibrationPaterns';
+import { useSelector } from 'react-redux';
+import { selectEmail } from '../redux/selectors/personalInf';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const { width } = Dimensions.get('window');
 const isSmallDevice = width < 370;
 export default function Settings({ navigation }) {
+    const email = useSelector(selectEmail)
+    const isLoggedIn = email && email.trim() !== ""
+
     const handleNavigation = useCallback((route) => {
         lightVibration();
         navigation.navigate(route);
@@ -34,13 +40,15 @@ export default function Settings({ navigation }) {
         <BackgroundColorContainer>
             <BackgroundImageContainer>
                 <View style={styles.container}>
-                    <CustomButton
+                    {/* <CustomButton
                         onPress={() => handleNavigation('Upgrade')}
                         style={styles.upgradeButton}
                         textStyle={styles.upgradeButtonText}
                     >
                         Upgrade to premium
-                    </CustomButton>
+                    </CustomButton> */}
+                    <SafeAreaView>
+
                     <ScrollView>
                         <Section title="System">
                             <SettingsItem onPress={() => handleNavigation('PersonalInformation')} icon="person" text="Personal Information" />
@@ -58,14 +66,15 @@ export default function Settings({ navigation }) {
                             <SettingsItem onPress={navigateToHelp} icon="help-circle-outline" text="Help" />
                             <SettingsItem onPress={navigateToInstagram} icon="logo-instagram" text="Instagram" />
                         </Section>
-                        <Section title="Account">
-                            <SettingsItem onPress={() => handleNavigation('Register')} icon="create-outline" text="Create account" />
-                            <SettingsItem onPress={() => handleNavigation('Login')} icon="log-in-outline" text="Log in" />
-                            <SettingsItem onPress={logOut} icon="log-out-outline" text="Log out" />
-
-
-                        </Section>
+                        {/* <Section title="Account">
+                            {isLoggedIn ? <SettingsItem onPress={logOut} icon="log-out-outline" text="Log out" /> : <>
+                                <SettingsItem onPress={() => handleNavigation('Register')} icon="create-outline" text="Create account" />
+                                <SettingsItem onPress={() => handleNavigation('Login')} icon="log-in-outline" text="Log in" />
+                            </>}
+                        </Section> */}
                     </ScrollView>
+                    </SafeAreaView>
+
                 </View>
             </BackgroundImageContainer>
         </BackgroundColorContainer>
