@@ -12,8 +12,6 @@ export const personalInfoSchema = {
     premiumExpiresAt: "date?",
     premiumAutoRenew: { type: "bool", default: false },
     subscriptionType: { type: "string", default: "" },
-    cardNumber: { type: "string", default: "" },
-    cardExpireDate: "date?",
     email: { type: "string", default: "" },
     joinedDate: "date?",
     jsonToken: { type: "string", default: '' }

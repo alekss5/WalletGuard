@@ -3,20 +3,18 @@ import { fetchPersonalInfoFromRealm } from "../realm/realmInstance";
 import { initializeFromRealm } from "./reduxHelpers";
 
 const initialState = {
-  name: '',
-  age: '',
-  salary: '',
-  jobSector: '',
+  name: " ",
+  age: " ",
+  salary: " ",
+  jobSector: " ",
   passTheSetup: false,
   isPremium:true,
   premiumExpiresAt: null,
   premiumAutoRenew:false,
-  subscriptionType: '', 
-  cardNumber:'',
-  cardExpireDate:'',
-  email:'',
-  joinedDate:'',
-  jsonToken:'',
+  subscriptionType: " ", 
+  email:" ",
+  joinedDate:null,
+  jsonToken:" ",
 };
 
 export const initializePersonalInfo = initializeFromRealm(
@@ -31,17 +29,17 @@ const personalInfoSlice = createSlice({
   reducers: {
     setJobInformation: (state, action) => {
       const { salary, jobSector } = action.payload;
-      state.salary = String(salary);
+      state.salary = salary;
       state.jobSector = jobSector;
       state.passTheSetup = true;
     },
     setPersonalInfo: (state, action) => {
       const { name, age } = action.payload;
       state.name = name;
-      state.age = String(age);
+      state.age = age;
     },
     setSalary: (state, action) => {
-      state.salary = String(action.payload);
+      state.salary = action.payload;
     },
     setToken:(state, action) => {
       state.jsonToken = action.payload
