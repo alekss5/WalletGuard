@@ -14,8 +14,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { lightVibration } from '../utils/vibrationPaterns';
 import CustomInput from '../components/UI/CustomInput';
-import DoneAnimation from '../components/UI/DoneAnimation';
 import { selectSubscriptions } from '../redux/selectors/budget';
+import { toggleDoneAnumation } from '../redux/uiNoRealmReducer';
 
 const MemoizedCustomText = React.memo(CustomText);
 const MemoizedCustomButton = React.memo(CustomButton);
@@ -29,7 +29,6 @@ export default function AddTransaction({ navigation }) {
   const [date, setDate] = useState(new Date());
   const [amount, setAmount] = useState('');
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [showAnimation, setShowAnimation] = useState(false);
 
   const subscriptions = useSelector(selectSubscriptions);
   const { item } = route.params || {};
@@ -50,11 +49,11 @@ export default function AddTransaction({ navigation }) {
         [
           {
             text: 'Cancel',
-            style: 'cancel', // Optionally add style to the Cancel button
+            style: 'cancel', 
           },
           {
             text: 'Add Type',
-            onPress: () => navigation.navigate('ExpenseTypes', { back: 'addTransaction' }), // Navigate to type selection
+            onPress: () => navigation.navigate('ExpenseTypes', { back: 'addTransaction' }), 
           },
         ]
       );
@@ -71,7 +70,7 @@ export default function AddTransaction({ navigation }) {
       dispatch(addExpense({ date: formattedDate, category: item, amount: amountString }));
     }
   
-    setShowAnimation(true);
+    dispatch(toggleDoneAnumation())
     setDate(new Date());
     setAmount('');
   }, [date, amount, item, dispatch]);
@@ -146,8 +145,6 @@ export default function AddTransaction({ navigation }) {
             </SafeAreaView>
           </BackgroundImageContainer>
         </BackgroundColorContainer>
-
-        <DoneAnimation visible={showAnimation} onFinish={() => setShowAnimation(false)} />
 
       </View>
     </TouchableWithoutFeedback>

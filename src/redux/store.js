@@ -14,6 +14,7 @@ import {
 import uiReducer from "./uiReducer";
 import budgetReducer from "./budgetReducer";
 import personalInfReducer from "./personalInfReducer";
+import uiNoRealm from "./uiNoRealmReducer"
 
 import { saveUIStateToRealm, saveBudgetDataToRealm, savePersonalInfoToRealm } from '../realm/realmInstance';  // Assuming you have these in a separate file
 
@@ -21,13 +22,15 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage: AsyncStorage,
-  whitelist: ["ui", "budget", "personalInfo"]
+  whitelist: ["ui", "budget", "personalInfo",'uiNoRealm']
 };
 
 const rootReducer = combineReducers({ 
   ui: uiReducer,
   budget: budgetReducer,
   personalInfo: personalInfReducer,
+   uiNoRealm: uiNoRealm,
+
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

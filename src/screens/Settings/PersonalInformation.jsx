@@ -7,6 +7,7 @@ import SubmitButton from '../../components/UI/SubmitButton';
 import { useDispatch, useSelector } from 'react-redux';
 import {  setPersonalInfo } from '../../redux/personalInfReducer';
 import { selectAge, selectName } from '../../redux/selectors/personalInf';
+import { toggleDoneAnumation } from '../../redux/uiNoRealmReducer';
 
 export default function PersonalInformation({ navigation }) {
     const dispatch = useDispatch();
@@ -40,7 +41,7 @@ export default function PersonalInformation({ navigation }) {
             alert("Please enter a valid age.");
             return;
         }
-
+        dispatch(toggleDoneAnumation())
         dispatch(setPersonalInfo({ name: trimmedName, age: parsedAge }));
         navigation.navigate('Settings');
     };

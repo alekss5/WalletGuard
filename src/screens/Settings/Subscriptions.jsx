@@ -12,25 +12,22 @@ import NumberPicker from '../../components/UI/NumberPicker';
 import SubmitButton from '../../components/UI/SubmitButton';
 import ExpenseItem from '../../components/ExpenseItem';
 import CustomInput from '../../components/UI/CustomInput';
-import DoneAnimation from '../../components/UI/DoneAnimation';
 import { selectCurrency, selectSubscriptions } from '../../redux/selectors/budget';
+import { toggleDoneAnumation } from '../../redux/uiNoRealmReducer';
 
 export default function Subscriptions({ navigation }) {
   const route = useRoute();
   const dispatch = useDispatch();
   const { item } = route.params || {};
   const currency = useSelector(selectCurrency);
+  const subscriptions = useSelector(selectSubscriptions);
 
   const { colors } = useTheme();
   const [day, setDay] = useState(1);
   const [tempDay, setTempDay] = useState(1);
   const [amount, setAmount] = useState('');
   const [showPicker, setShowPicker] = useState(false);
-  const [showAnimation, setShowAnimation] = useState(false);
 
-
-  const subscriptions = useSelector(selectSubscriptions);
-  
   const navigateToExpensesTypes = () => {
     navigation.navigate('ExpenseTypes',{back:'subscriptions'});
     if (showPicker === true) {
@@ -49,9 +46,9 @@ export default function Subscriptions({ navigation }) {
       return;
     }
 
+    dispatch(toggleDoneAnumation());
     dispatch(addSubscription({ day, type: item, amount }));
     
-    setShowAnimation(true);
     setDay(1);
     setAmount('');
   };
@@ -142,7 +139,6 @@ export default function Subscriptions({ navigation }) {
     <CustomText style={{ alignSelf: 'center',paddingTop:10 }}>Set a repeating expenses</CustomText>
   }
 />
-<DoneAnimation visible={showAnimation} onFinish={() => setShowAnimation(false)} />
 </BackgroundColorContainer>
   );
 }

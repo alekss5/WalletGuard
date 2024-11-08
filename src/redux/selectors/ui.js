@@ -8,3 +8,5 @@ export const selectWeeklyNotification = (state) => state.ui.weeklyNotification;
 export const selectSubscNotification = (state) => state.ui.subscriptionNotification;
 export const selectMonthlyRefreshNotification = (state) => state.ui.monthlyRefreshNotification;
 export const selectUIState = (state) => state.ui;
+
+export const selectDoneAnimation = (state) => state.uiNoRealm.showDoneAnimation;

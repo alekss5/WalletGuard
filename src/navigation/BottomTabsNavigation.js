@@ -7,6 +7,10 @@ import Analytics from '../screens/Analytics';
 import { TouchableOpacity } from 'react-native';
 import SettingsStackNavigation from './SettingsNavigation';
 import { lightVibration } from '../utils/vibrationPaterns';
+import DoneAnimation from '../components/UI/DoneAnimation';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectDoneAnimation } from '../redux/selectors/ui';
+import { toggleDoneAnumation } from '../redux/uiNoRealmReducer';
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -45,6 +49,13 @@ const AddTransactionButton = ({ focused, ...props }) => {
 
 const BottomTabsNavigation = () => {
     const { colors } = useTheme();
+    const showAnimation = useSelector(selectDoneAnimation)
+    console.log(showAnimation)
+    const dispatch = useDispatch()
+
+    const handleAnimation = ()=>{
+        dispatch(toggleDoneAnumation())
+    }
 
     const tabBarActiveBackgroundColor = colors.text === '#000000' ? colors.subtext : undefined;
 
@@ -62,6 +73,7 @@ const BottomTabsNavigation = () => {
     };
 
     return (
+        <>
         <BottomTabs.Navigator
             screenOptions={({ route }) => ({
                 tabBarStyle: { backgroundColor: colors.background },
@@ -106,6 +118,8 @@ const BottomTabsNavigation = () => {
                 }}
             />
         </BottomTabs.Navigator>
+        <DoneAnimation visible={showAnimation} onFinish={handleAnimation}/>
+        </>
     );
 };
 

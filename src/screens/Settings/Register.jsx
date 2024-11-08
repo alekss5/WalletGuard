@@ -10,6 +10,7 @@ import { selectAge, selectJobSector, selectName, selectSalary } from '../../redu
 import { useTheme } from 'react-native-paper';
 import { putRegisterUser } from '../../utils/https';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { toggleDoneAnumation } from '../../redux/uiNoRealmReducer';
 
 export default function Register({ navigation }) {
     const dispatch = useDispatch();
@@ -90,6 +91,7 @@ export default function Register({ navigation }) {
             if (response.status === 201) {
               setIsloading(false);
               navigation.navigate('Settings');
+              dispatch(toggleDoneAnumation())
               dispatch(setEmail(email));
               dispatch(setToken(response.token));
             } else {
