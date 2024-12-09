@@ -33,7 +33,6 @@ const personalInfoSlice = createSlice({
       state.jobSector = jobSector;
       state.passTheSetup = true;
       state.joinedDate = new Date().toISOString().split('T')[0];
-      console.log(state.joinedDate);
     },
     setPersonalInfo: (state, action) => {
       const { name, age } = action.payload;

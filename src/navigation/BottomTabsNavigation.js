@@ -11,15 +11,16 @@ import DoneAnimation from '../components/UI/DoneAnimation';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDoneAnimation } from '../redux/selectors/ui';
 import { toggleDoneAnumation } from '../redux/uiNoRealmReducer';
+import { isTablet } from '../utils/deviceHelper';
 
+const tablet = isTablet()
 const BottomTabs = createBottomTabNavigator();
-
 
 const AddTransactionButton = ({ focused, ...props }) => {
     const { colors } = useTheme();
 
-    const backgroundColor = focused ? colors.elevation.level5 : colors.accent; 
-    const iconColor = focused ?  colors.accent :colors.text 
+    const backgroundColor = focused ? colors.elevation.level5 : colors.accent;
+    const iconColor = focused ? colors.accent : colors.text
 
     return (
         <TouchableOpacity
@@ -29,9 +30,9 @@ const AddTransactionButton = ({ focused, ...props }) => {
                 bottom: 70,
                 left: '90%',
                 transform: [{ translateX: -25 }],
-                width: 50,
-                height: 50,
-                backgroundColor,  
+                width: tablet ? 70 : 50,
+                height: tablet ? 70 : 50,
+                backgroundColor,
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: 10,
@@ -41,84 +42,98 @@ const AddTransactionButton = ({ focused, ...props }) => {
                 props.onPress(e);
             }}
         >
-            <AntDesign name="plus" size={40} color={iconColor} />
+            <AntDesign name="plus" size={tablet ? 50 : 40} color={iconColor} />
         </TouchableOpacity>
     );
 };
 
-
 const BottomTabsNavigation = () => {
     const { colors } = useTheme();
     const showAnimation = useSelector(selectDoneAnimation)
-    console.log(showAnimation)
     const dispatch = useDispatch()
 
-    const handleAnimation = ()=>{
+    const handleAnimation = () => {
         dispatch(toggleDoneAnumation())
     }
 
     const tabBarActiveBackgroundColor = colors.text === '#000000' ? colors.subtext : undefined;
 
     const renderTabBarIcon = (route, color, size) => {
+        const iconSize = tablet ? 35 : size;
+        const customWidth = tablet ? 40 : size; // Set your custom width here
+        const customHeight = tablet ? 40 : size; // Set your custom height here
+    
         switch (route.name) {
             case 'HomeScreen':
-                return <AntDesign name="home" size={30} color={color} />;
+                return <AntDesign name="home" size={iconSize} color={color} style={{ width: customWidth, height: customHeight }} />;
             case 'Analytics':
-                return <MaterialCommunityIcons name="google-analytics" size={size} color={color} />;
+                return <MaterialCommunityIcons name="google-analytics" size={iconSize} color={color} style={{ width: customWidth, height: customHeight }} />;
             case 'SettingsStack':
-                return <AntDesign name="setting" size={size} color={color} />;
+                return <AntDesign name="setting" size={iconSize} color={color} style={{ width: customWidth, height: customHeight }} />;
             default:
                 return null;
         }
     };
+    
 
     return (
         <>
-        <BottomTabs.Navigator
-            screenOptions={({ route }) => ({
-                tabBarStyle: { backgroundColor: colors.background },
-                headerShown: false,
-                tabBarActiveTintColor: colors.accent,
-                tabBarActiveBackgroundColor: tabBarActiveBackgroundColor,
-                tabBarItemStyle: { borderRadius: 200 },
-                tabBarButton: (props) => (
-                    <TouchableOpacity
-                        {...props}
-                        onPress={(e) => {
-                            lightVibration();
-                            props.onPress(e);
-                        }}
-                    />
-                ),
-                tabBarIcon: ({ color, size }) => renderTabBarIcon(route, color, size),
-            })}
-        >
-            <BottomTabs.Screen
-                name="HomeScreen"
-                component={HomeScreen}
-                options={{ tabBarLabel: 'Home' }}
-            />
-            <BottomTabs.Screen
-                name="Analytics"
-                component={Analytics}
-                options={{ tabBarLabel: 'Analytics' }}
-            />
-            <BottomTabs.Screen
-                name="SettingsStack"
-                component={SettingsStackNavigation}
-                options={{ tabBarLabel: 'Settings' }}
-            />
-            <BottomTabs.Screen
-                name="AddTransaction"
-                component={AddTransaction}
-                options={{
-                    tabBarLabel: '',
-                    tabBarActiveTintColor: colors.text,
-                    tabBarButton: (props) => <AddTransactionButton {...props} focused={props.accessibilityState.selected} />,
-                }}
-            />
-        </BottomTabs.Navigator>
-        <DoneAnimation visible={showAnimation} onFinish={handleAnimation}/>
+            <BottomTabs.Navigator
+                screenOptions={({ route }) => ({
+                    tabBarStyle: {
+                        backgroundColor: colors.background,
+                        height: tablet ? 95 : 80,
+                      },
+                    headerShown: false,
+                    tabBarActiveTintColor: colors.accent,
+                    tabBarActiveBackgroundColor: tabBarActiveBackgroundColor,
+                    tabBarItemStyle: { borderRadius: 200 },
+                    tabBarLabelStyle: {
+                        marginLeft:tablet?30:0,
+                        fontSize: tablet ? 18 : 12, 
+                    },
+                    tabBarButton: (props) => (
+                        <TouchableOpacity
+                            {...props}
+                            onPress={(e) => {
+                                lightVibration();
+                                props.onPress(e);
+                            }}
+                        />
+                    ),
+                    tabBarIcon: ({ color, size }) => {
+                        const iconSize = tablet ? 35 : size;
+                        return renderTabBarIcon(route, color, iconSize);
+                    },
+                })}
+            >
+
+                <BottomTabs.Screen
+                    name="HomeScreen"
+                    component={HomeScreen}
+                    options={{ tabBarLabel: 'Home' }}
+                />
+                <BottomTabs.Screen
+                    name="Analytics"
+                    component={Analytics}
+                    options={{ tabBarLabel: 'Analytics' }}
+                />
+                <BottomTabs.Screen
+                    name="SettingsStack"
+                    component={SettingsStackNavigation}
+                    options={{ tabBarLabel: 'Settings' }}
+                />
+                <BottomTabs.Screen
+                    name="AddTransaction"
+                    component={AddTransaction}
+                    options={{
+                        tabBarLabel: '',
+                        tabBarActiveTintColor: colors.text,
+                        tabBarButton: (props) => <AddTransactionButton {...props} focused={props.accessibilityState.selected} />,
+                    }}
+                />
+            </BottomTabs.Navigator>
+            <DoneAnimation visible={showAnimation} onFinish={handleAnimation} />
         </>
     );
 };

@@ -16,6 +16,9 @@ import { lightVibration } from '../utils/vibrationPaterns';
 import CustomInput from '../components/UI/CustomInput';
 import { selectSubscriptions } from '../redux/selectors/budget';
 import { toggleDoneAnumation } from '../redux/uiNoRealmReducer';
+import { isTablet } from '../utils/deviceHelper';
+
+const tablet = isTablet()
 
 const MemoizedCustomText = React.memo(CustomText);
 const MemoizedCustomButton = React.memo(CustomButton);
@@ -156,6 +159,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   safeArea: {
+    alignSelf: 'center',
+    width:tablet?'80%':'100%',
+    marginTop:tablet?'5%':'0%',
     padding: 20,
   },
   headerText: {

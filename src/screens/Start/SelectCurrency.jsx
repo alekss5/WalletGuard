@@ -1,9 +1,7 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { View, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import currencyCodes from 'currency-codes';
-import LottieView from "lottie-react-native";
 
-import money from '../../../assets/animations/money.json';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { useTheme } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
@@ -13,7 +11,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import SubmitButton from '../../components/UI/SubmitButton';
 import CustomInput from '../../components/UI/CustomInput';
 import CustomDivider from '../../components/UI/CustomDivider';
+import MoneyAnimation from '../../components/MoneyAnimation';
+import { isTablet } from '../../utils/deviceHelper';
 
+const tablet = isTablet()
 const SelectCurrency = ({ navigation }) => {
     const { colors } = useTheme();
     const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const SelectCurrency = ({ navigation }) => {
     }, []);
 
     const handleContinue = () => {
-      
+
         if (localSelectedCurrency) {
             const currencySymbol = getSymbolFromCurrency(localSelectedCurrency);
             if (currencySymbol) {
@@ -47,21 +48,15 @@ const SelectCurrency = ({ navigation }) => {
                 navigation.navigate('Salary');
             }
         }
-        else{
-           Alert.alert("Please select your currency.");
-      
+        else {
+            Alert.alert("Please select your currency.");
+
         }
     };
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <LottieView
-                source={money}
-                autoPlay
-                loop={true}
-                style={styles.animation}
-                speed={0.5}
-            />
+            <MoneyAnimation />
             <CustomText style={styles.mainText}>Choose your currency</CustomText>
             <CustomInput
                 placeholder='Search'
@@ -70,8 +65,8 @@ const SelectCurrency = ({ navigation }) => {
                 onChangeText={onChangeSearch}
             />
             <FlatList
-                style={{ backgroundColor: 'transparent' }}  // FlatList background
-                contentContainerStyle={{ backgroundColor: 'transparent' }}  // Content inside 
+                style={{ backgroundColor: 'transparent',marginLeft:'2%'}}  
+                contentContainerStyle={{ backgroundColor: 'transparent' }}
                 data={filteredCurrencies}
                 keyExtractor={(item) => item.code}
                 renderItem={({ item }) => {
@@ -87,7 +82,7 @@ const SelectCurrency = ({ navigation }) => {
                     );
                 }}
             />
-            <CustomDivider/>
+            <CustomDivider />
             <SubmitButton
                 onPress={handleContinue}
                 style={styles.submitButton}
@@ -106,11 +101,6 @@ const styles = StyleSheet.create({
         width: '95%',
         alignSelf: 'center',
     },
-    animation: {
-        position: 'absolute',
-        width: "100%",
-        height: "80%",
-    },
     item: {
         width: '98%',
         borderRadius: 10,
@@ -119,16 +109,18 @@ const styles = StyleSheet.create({
         borderBottomColor: '#ccc',
     },
     text: {
-        fontSize: 16,
+        fontSize: tablet ? 25 : 16,
     },
     submitButton: {
         alignSelf: 'center',
         width: '90%',
+        maxWidth:500,
         marginBottom: 50,
     }, mainText: {
-        marginBottom: 20,
+        marginTop: tablet?50:0,
+        marginBottom: tablet ? 30 : 20,
         textAlign: "center",
-        fontSize: 30,
+        fontSize: tablet ? 40 : 30,
         fontWeight: "600",
     },
 });

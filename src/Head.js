@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { Alert, StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View, AppState } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { lightTheme } from './themes/lightTheme';
 import { darkTheme } from './themes/darkTheme';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useRef } from 'react';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
 import Splash from './screens/Splash';
@@ -28,7 +28,12 @@ export default function Head() {
   const jestToken = useSelector(selectJsonToken);
   const dispatch = useDispatch();
   const [isSplashActive, setSplashActive] = useState(false);
+  const [appState, setAppState] = useState(AppState.currentState);
+
+  const initialLoad = useRef(true);
+
   const theme = isDarkTheme ? darkTheme : lightTheme;
+
   let statusBarColor = isDarkTheme ? 'light' : 'dark';
 
   const setupNotifications = async (budgetData) => {
@@ -74,19 +79,23 @@ export default function Head() {
   }
 
   const loadInitialState = async () => {
+    // console.log("INITIAL STATE")
+    setSplashActive(false)
     const { lastDateIn } = uiState || {};
     const { subscriptionsArray: subscriptions, startDate } = budgetState;
 
+    const lastDateInFormated = lastDateIn.split('T')[0]
 
-    if (isOneMonthPassed(lastDateIn, startDate)) {
+    if (isOneMonthPassed(lastDateInFormated, startDate)) {
       Alert.alert("Balance Refreshed", "The total balance has been refreshed!", [{ text: "OK" }]);
       dispatch(resetBudgetData({ salary }));
     }
 
-    checkSubscriptions(subscriptions, lastDateIn);
-    dispatch(setLastDateIn());
+    checkSubscriptions(subscriptions, lastDateInFormated);
+    // dispatch(setLastDateIn());
 
     await setupNotifications(budgetState);
+    setTimeout(() => setSplashActive(true), 1500);
   };
 
   const handleSignup = async () => {
@@ -109,7 +118,7 @@ export default function Head() {
           email: 'aleksandarg305@gmail.com',
           password: "5505667Sa",
         })
-       //  if (user.status === 201) { //for register
+        //  if (user.status === 201) { //for register
         if (user.status === 200) {
           const token = user.data.token;
           dispatch(setToken(token))
@@ -117,16 +126,46 @@ export default function Head() {
         }
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
 
   };
 
   useEffect(() => {
-    loadInitialState();
-    setTimeout(() => setSplashActive(true), 1500); // Show splash for 1.5 seconds
-    // handleSignup()
-  }, []);
+    const handleAppStateChange = (nextAppState) => {
+      const { lastDateIn } = uiState || {};
+      if (appState.match(/inactive|background/) && nextAppState === 'active') {
+        const now = new Date();
+
+        if (lastDateIn) {
+          const lastActiveDate = new Date(lastDateIn);
+          const timeAwayInSeconds = (now - lastActiveDate) / 1000;
+          // console.log(`User was away for ${timeAwayInSeconds} seconds.`);
+
+          if (timeAwayInSeconds > 1800) { //30 min
+            loadInitialState();
+          }
+        }
+
+        dispatch(setLastDateIn());
+      }
+
+      setAppState(nextAppState);
+    };
+
+    const subscription = AppState.addEventListener('change', handleAppStateChange);
+
+    if (initialLoad.current) {
+      loadInitialState();
+      initialLoad.current = false; 
+    }
+
+    return () => {
+      subscription.remove();
+    };
+  }, [appState]);
+
+
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>

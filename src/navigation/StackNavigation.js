@@ -10,7 +10,9 @@ import { AntDesign } from "@expo/vector-icons";
 import { lightVibration } from "../utils/vibrationPaterns";
 import StartStack from "./StartStack";
 import CommingSoon from "../screens/CommingSoon";
+import { isTablet } from "../utils/deviceHelper";
 
+const tablet = isTablet()
 const Stack = createStackNavigator();
 
 export default function StackNavigation({ isUser }) {
@@ -22,9 +24,12 @@ export default function StackNavigation({ isUser }) {
             <Stack.Navigator
                 screenOptions={({ navigation }) => ({
                     headerTintColor: headerTintColor,
+            
                     headerStyle: {
+                        
                         backgroundColor: colors.background,
                     },
+
                     headerLeft: () => (
                         <TouchableOpacity
                             onPress={() => {
@@ -43,6 +48,7 @@ export default function StackNavigation({ isUser }) {
                         name="StartStack"
                         component={StartStack}
                         options={{
+                            
                             headerShown: false,
                             gestureEnabled: false,
                         }}
@@ -69,6 +75,7 @@ export default function StackNavigation({ isUser }) {
                 <Stack.Screen
                     name="ExpenseTypes"
                     component={ExpenseTypes}
+                    
                     options={{
                         title: 'Select expense type',
                         headerBackTitle: 'Back',

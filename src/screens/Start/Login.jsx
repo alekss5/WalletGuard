@@ -1,46 +1,47 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Keyboard, TouchableWithoutFeedback,Alert } from "react-native";
+import { StyleSheet, View, Keyboard, TouchableWithoutFeedback, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import LottieView from "lottie-react-native";
 
-import money from '../../../assets/animations/money.json';
 import CustomText from "../../components/UI/CustomText";
 import CustomDivider from "../../components/UI/CustomDivider";
 import SubmitButton from "../../components/UI/SubmitButton";
 import { useDispatch } from "react-redux";
 import { setPersonalInfo } from "../../redux/personalInfReducer";
 import CustomInput from "../../components/UI/CustomInput";
+import { isTablet } from "../../utils/deviceHelper";
+import MoneyAnimation from "../../components/MoneyAnimation";
 
+const tablet = isTablet()
 export default function Login({ navigation }) {
     const dispatch = useDispatch();
-    const [name, setName] = useState(""); 
-    const [age, setAge] = useState(""); 
+    const [name, setName] = useState("");
+    const [age, setAge] = useState("");
 
     const handleContinue = () => {
         const trimmedName = name.trim();
         const trimmedAge = age.trim();
         const parsedAge = parseInt(trimmedAge, 10);
-    
+
         if (trimmedName.length === 0) {
             Alert.alert("Please enter your name.");
             return;
         }
-    
+
         if (trimmedAge.length === 0) {
             Alert.alert("Please enter your age.");
             return;
         }
-        
+
         if (parsedAge >= 99) {
             Alert.alert('Wow is this your real age?');
             return;
         }
-    
+
         if (isNaN(parsedAge) || parsedAge <= 0) {
             Alert.alert("Please enter a valid age.");
             return;
         }
-    
+
         dispatch(setPersonalInfo({ name: trimmedName, age: parsedAge }));
         navigation.navigate('StartCurrency');
     };
@@ -48,15 +49,10 @@ export default function Login({ navigation }) {
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <SafeAreaView style={styles.safeArea}>
-                <LottieView
-                    source={money}
-                    autoPlay
-                    loop={true}
-                    style={styles.animation}
-                    speed={0.5}
-                />
+                <MoneyAnimation />
+
                 <View style={styles.container}>
-                    <View style={{ marginTop: '20%' }}>
+                    <View style={{ marginTop: tablet ? '35%' : '20%' }}>
                         <CustomText style={styles.mainText}>What is your name?</CustomText>
                         <CustomInput
                             value={name}
@@ -67,25 +63,24 @@ export default function Login({ navigation }) {
                             maxLength={14}
                             autoCorrect={false}
                         />
-                        <CustomText style={styles.mainText}>Enter your age</CustomText> 
+                        <CustomText style={styles.mainText}>Enter your age</CustomText>
                         <CustomInput
                             value={age}
                             onChangeText={text => setAge(text)}
                             mode="outlined"
                             style={styles.textInput}
                             placeholder="Enter your age"
-                            keyboardType="numeric" 
-                            maxLength={3} 
+                            keyboardType="numeric"
+                            maxLength={3}
                         />
                     </View>
 
                     <View style={styles.bottomContainer}>
                         <CustomDivider />
-                        
+
                         <SubmitButton
                             onPress={handleContinue}
-                            style={styles.submitButton}
-                        >
+                            style={styles.submitButton}>
                             Continue
                         </SubmitButton>
                     </View>
@@ -99,16 +94,11 @@ const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
     },
-    animation: {
-        position: 'absolute',
-        width: "100%",
-        height: "80%",
-    },
     container: {
         flex: 1,
-        width:'90%',
-        marginLeft:'5%',
-        
+        alignSelf: 'center',
+        width: '90%',
+        maxWidth: 500,
         justifyContent: 'space-between',
     },
     mainText: {
@@ -118,11 +108,9 @@ const styles = StyleSheet.create({
         fontWeight: "600",
     },
     textInput: {
-      
         marginBottom: 20,
         backgroundColor: 'transparent',
-        borderColor:'black',
-
+        borderColor: 'black',
     },
     bottomContainer: {
         alignItems: 'center',

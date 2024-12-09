@@ -48,7 +48,7 @@ PODS:
   - hermes-engine (0.74.5):
     - hermes-engine/Pre-built (= 0.74.5)
   - hermes-engine/Pre-built (0.74.5)
-  - lottie-ios (4.4.1)
+  - lottie-ios (4.4.3)
   - lottie-react-native (6.7.0):
     - DoubleConversion
     - glog
@@ -1605,7 +1605,7 @@ SPEC CHECKSUMS:
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
   glog: fdfdfe5479092de0c4bdbebedd9056951f092c4f
   hermes-engine: 8c1577f3fdb849cbe7729c2e7b5abc4b845e88f8
-  lottie-ios: e047b1d2e6239b787cc5e9755b988869cf190494
+  lottie-ios: fcb5e73e17ba4c983140b7d21095c834b3087418
   lottie-react-native: f851c0e235f171d99083c803f728f644be1dcf65
   RCT-Folly: 02617c592a293bd6d418e0a88ff4ee1f88329b47
   RCTDeprecation: 3afceddffa65aee666dafd6f0116f1d975db1584
@@ -1677,4 +1677,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 8982db18f927e824e8bd1fdc5bae77bf512a5dea
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

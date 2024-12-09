@@ -1,4 +1,14 @@
 
+import { Audio } from 'expo-av';
+
+const playSound = async () => {
+  const { sound } = await Audio.Sound.createAsync(
+    require('../../assets/sounds/pop.mp3')
+  );
+  await sound.playAsync();
+  sound.unloadAsync(); 
+};
+
 export const categoryColors = {
     "Cash": "#4CAF50",
     "Fast Food": "#FF0000",

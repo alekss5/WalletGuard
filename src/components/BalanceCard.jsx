@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     },
     card: {
         width: '90%',
+        maxWidth:400,
         borderRadius: 10,
         elevation: 10,
         shadowColor: '#000',

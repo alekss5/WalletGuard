@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { StyleSheet, ScrollView, View, Dimensions } from 'react-native';
+import { StyleSheet, ScrollView, View, Dimensions,Linking ,Alert} from 'react-native';
 
 import SettingsItem from '../components/SettingsItem';
 import BackgroundColorContainer from '../components/UI/BackgroundColorContainer';
@@ -27,11 +27,24 @@ export default function Settings({ navigation }) {
         navigation.navigate('CommingSoon');
 
     }
-    const navigateToInstagram = () => {
-        lightVibration();
-        navigation.navigate('CommingSoon');
+    const navigateToInstagram = async () => {
+         const insUrl = 'https://www.instagram.com/walletguardian/';
+        const deepLink = 'instagram://user?username=walletguardian';
+      
+        try {
+          // Test if the deep link is supported
+          const supported = await Linking.canOpenURL(deepLink);
+          if (supported) {
+            await Linking.openURL(deepLink); // Open Instagram app
+          } else {
+            await Linking.openURL(insUrl); // Fallback to browser
+          }
+        } catch (error) {
+        console.log(error)
+          Alert.alert('Error', `Unable to open Instagram: ${error.message}`);
+        }
+      };
 
-    }
     const logOut = () => {
 
     }

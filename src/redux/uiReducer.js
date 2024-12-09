@@ -66,7 +66,7 @@ const uiSlice = createSlice({
       }
     },
     setLastDateIn: (state) => {
-      state.lastDateIn = new Date().toISOString().split('T')[0];
+      state.lastDateIn = new Date().toISOString();
     },
     initializeUIState: (state, action) => {
       return action.payload;
