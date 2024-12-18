@@ -8,7 +8,8 @@ import { useTheme } from 'react-native-paper'
 import CustomText from '../components/UI/CustomText'
 import { categoryColors,getWeekNumber,isCurrentMonth } from '../utils/GlobalFunctions'
 import { selectExpensesArray, selectMonthlyIncome } from '../redux/selectors/budget'
-
+import { isTablet } from '../utils/deviceHelper'
+const tablet = isTablet()
 const Analytics = () => {
   const expenses = useSelector(selectExpensesArray)
   const incomeArray = useSelector(selectMonthlyIncome)
@@ -129,7 +130,7 @@ const Analytics = () => {
     <BackgroundColorContainer>
       <BackgroundImageContainer>
         <SafeAreaView style={styles.container}>
-          <Text style={[styles.title, { color: colors.text }]}>Analytics</Text>
+          <CustomText style={styles.title}>Analytics</CustomText>
           <ScrollView contentContainerStyle={styles.scrollContainer}>
             <CustomText style={[styles.chartTitle,{color:colors.subtext}]}>Monthly spendings</CustomText>
             <LineChart
@@ -165,7 +166,8 @@ const Analytics = () => {
               />
               </>
             ) : (
-              <Text style={[styles.noDataText, { color: colors.text }]}>No Income Data</Text>
+              <CustomText>No Income Data</CustomText>
+            
             )}
           </ScrollView>
         </SafeAreaView>
@@ -184,7 +186,7 @@ const styles = StyleSheet.create({
     paddingBottom:100
   },
   title: {
-    paddingTop:20,
+    paddingTop: tablet?40:20,
     textAlign:'center',
     fontSize: 24,
     fontWeight: 'bold',
@@ -193,10 +195,6 @@ const styles = StyleSheet.create({
   chartStyle: {
     marginVertical: 8,
     borderRadius: 16
-  },
-  noDataText: {
-    fontSize: 18,
-    marginTop: 20
   },
   chartTitle:{
     fontSize:19,

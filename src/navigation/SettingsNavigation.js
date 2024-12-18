@@ -11,7 +11,8 @@ import CurrencyList from "../screens/Settings/CurrencyList";
 import Notifications from "../screens/Settings/Notifications";
 import PersonalInformation from "../screens/Settings/PersonalInformation";
 import Login from "../screens/Settings/Login";
-
+import { isTablet } from "../utils/deviceHelper";
+const tablet = isTablet()
 const SettingsStack = createStackNavigator();
 
 export default function SettingsStackNavigation() {
@@ -23,6 +24,12 @@ export default function SettingsStackNavigation() {
                 headerTintColor: colors.text,
                 headerStyle: {
                     backgroundColor: colors.background,
+                },
+                headerTitleStyle: {
+                    fontSize: tablet ? 27 : 18,
+                },
+                headerBackTitleStyle:{
+                    fontSize: tablet ? 27 : 18,
                 },
                 headerBackTitle: 'Settings',
 
@@ -90,7 +97,7 @@ export default function SettingsStackNavigation() {
             <SettingsStack.Screen
                 name='Login'
                 component={Login}
-           
+
             />
         </SettingsStack.Navigator>
     );

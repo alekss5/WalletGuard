@@ -27,7 +27,7 @@ const AddTransactionButton = ({ focused, ...props }) => {
             {...props}
             style={{
                 position: 'absolute',
-                bottom: 70,
+                bottom: tablet ? 100 : 70,
                 left: '90%',
                 transform: [{ translateX: -25 }],
                 width: tablet ? 70 : 50,
@@ -60,9 +60,9 @@ const BottomTabsNavigation = () => {
 
     const renderTabBarIcon = (route, color, size) => {
         const iconSize = tablet ? 35 : size;
-        const customWidth = tablet ? 40 : size; // Set your custom width here
-        const customHeight = tablet ? 40 : size; // Set your custom height here
-    
+        const customWidth = tablet ? 40 : size;
+        const customHeight = tablet ? 40 : size;
+
         switch (route.name) {
             case 'HomeScreen':
                 return <AntDesign name="home" size={iconSize} color={color} style={{ width: customWidth, height: customHeight }} />;
@@ -74,7 +74,7 @@ const BottomTabsNavigation = () => {
                 return null;
         }
     };
-    
+
 
     return (
         <>
@@ -83,14 +83,14 @@ const BottomTabsNavigation = () => {
                     tabBarStyle: {
                         backgroundColor: colors.background,
                         height: tablet ? 95 : 80,
-                      },
+                    },
                     headerShown: false,
                     tabBarActiveTintColor: colors.accent,
                     tabBarActiveBackgroundColor: tabBarActiveBackgroundColor,
                     tabBarItemStyle: { borderRadius: 200 },
                     tabBarLabelStyle: {
-                        marginLeft:tablet?30:0,
-                        fontSize: tablet ? 18 : 12, 
+                        marginLeft: tablet ? 30 : 0,
+                        fontSize: tablet ? 18 : 12,
                     },
                     tabBarButton: (props) => (
                         <TouchableOpacity

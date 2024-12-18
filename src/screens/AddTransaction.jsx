@@ -1,5 +1,5 @@
-import React,{ useState, useCallback } from 'react';
-import { StyleSheet, Image, Platform, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard,Alert } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { StyleSheet, Image, Platform, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,7 +39,7 @@ export default function AddTransaction({ navigation }) {
   const handleSave = useCallback(() => {
     lightVibration();
     Keyboard.dismiss();
-  
+
     const amountValue = parseFloat(amount);
     if (isNaN(amountValue) || amountValue <= 0) {
       Alert.alert('Invalid Input', 'Please enter a valid amount greater than 0.');
@@ -52,27 +52,27 @@ export default function AddTransaction({ navigation }) {
         [
           {
             text: 'Cancel',
-            style: 'cancel', 
+            style: 'cancel',
           },
           {
             text: 'Add Type',
-            onPress: () => navigation.navigate('ExpenseTypes', { back: 'addTransaction' }), 
+            onPress: () => navigation.navigate('ExpenseTypes', { back: 'addTransaction' }),
           },
         ]
       );
       return;
     }
     const formattedDate = date.toISOString().split('T')[0];
-  
+
     const amountString = amountValue.toString();
 
-  
+
     if (item?.description === 'Income') {
       dispatch(addIncome({ date: formattedDate, category: item, amount: amountString }));
     } else {
       dispatch(addExpense({ date: formattedDate, category: item, amount: amountString }));
     }
-  
+
     dispatch(toggleDoneAnumation())
     setDate(new Date());
     setAmount('');
@@ -111,12 +111,12 @@ export default function AddTransaction({ navigation }) {
                   <MemoizedCustomText style={styles.dateDisplay}>{date.toDateString()}</MemoizedCustomText>
                   {showDatePicker && (
                     <DateTimePicker
-                    themeVariant=''
+                      themeVariant=''
                       value={date}
                       mode="date"
                       display="default"
                       onChange={onDateChange}
-                      
+
                     />
                   )}
                 </TouchableOpacity>
@@ -160,8 +160,8 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     alignSelf: 'center',
-    width:tablet?'80%':'100%',
-    marginTop:tablet?'5%':'0%',
+    width: tablet ? '80%' : '100%',
+    marginTop: tablet ? '5%' : '0%',
     padding: 20,
   },
   headerText: {
@@ -178,8 +178,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   icon: {
-    width: 25,
-    height: 20,
+    width: tablet?35:25,
+    height: tablet?30:20,
     marginLeft: 10,
   },
   datePicker: {
@@ -188,9 +188,9 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   dateDisplay: {
-    fontSize: 16,
+    fontSize: tablet ? 25 : 16,
     paddingVertical: 10,
-   
+
   },
   animationContainer: {
     ...StyleSheet.absoluteFillObject,

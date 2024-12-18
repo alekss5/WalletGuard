@@ -14,6 +14,8 @@ import CustomDivider from '../components/UI/CustomDivider';
 import Chart from '../components/Chart';
 import CustomButton from '../components/UI/CustomButton';
 import { selectName } from '../redux/selectors/personalInf';
+import { isTablet } from '../utils/deviceHelper';
+const tablet = isTablet()
 
 const { width } = Dimensions.get('window');
 const isSmallDevice = width < 370;
@@ -126,11 +128,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    padding: 8,
+    padding: tablet?12:8,
     ...(isSmallDevice && { padding: 5 }),
   },
   buttonText: {
-    fontSize: 16,
+
+    fontSize: tablet?25:16,
     ...(isSmallDevice && { fontSize: 14 }),
   },
 });

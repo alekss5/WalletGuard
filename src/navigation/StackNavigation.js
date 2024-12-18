@@ -29,6 +29,12 @@ export default function StackNavigation({ isUser }) {
                         
                         backgroundColor: colors.background,
                     },
+                    headerTitleStyle: {
+                        fontSize: tablet ? 27 : 18,
+                    },
+                    headerBackTitleStyle:{
+                        fontSize: tablet ? 27 : 18,
+                    },
 
                     headerLeft: () => (
                         <TouchableOpacity
@@ -85,6 +91,7 @@ export default function StackNavigation({ isUser }) {
                     name="CommingSoon"
                     component={CommingSoon}
                     options={{
+                 
                         headerShown: false,
                         headerBackTitle: 'Back',
                     }}
@@ -97,8 +104,6 @@ export default function StackNavigation({ isUser }) {
                         headerBackTitle: 'Home',
                     }}
                 />
-
-
             </Stack.Navigator>
         </NavigationContainer>
     );

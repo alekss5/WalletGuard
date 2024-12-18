@@ -10,7 +10,9 @@ import CustomDivider from '../components/UI/CustomDivider';
 import BackgroundColorContainer from '../components/UI/BackgroundColorContainer';
 import MonthYearPicker from '../components/UI/MonthYearPicker';
 import { selectBudgetData, selectExpensesArray } from '../redux/selectors/budget';
+import { isTablet } from '../utils/deviceHelper';
 
+const tablet = isTablet()
 
 export default function Expenses() {
     const { colors } = useTheme();
@@ -77,30 +79,32 @@ export default function Expenses() {
         setSelectedMonth(month);
         setPickerVisible(false);
     };
-
-    return (
+return (
         <BackgroundColorContainer>
             <SafeAreaView style={styles.container}>
-                
                 {/* Button to show the picker */}
                 <TouchableOpacity onPress={() => setPickerVisible(!isPickerVisible)}>
                     <View style={styles.centerWrapper}>
                         <View style={[styles.icon, { backgroundColor: total > 0 ? colors.success : colors.error }]}>
                             {total > 0 ? (
-                                <FontAwesome6 name="arrow-trend-up" size={45} color="#fff" />
+                                <FontAwesome6 name="arrow-trend-up" size={tablet ? 60 : 45} color="#fff" />
                             ) : (
-                                <FontAwesome6 name="arrow-trend-down" size={45} color="#fff" />
+                                <FontAwesome6 name="arrow-trend-down" size={tablet ? 60 : 45} color="#fff" />
                             )}
                         </View>
-                        <Text style={[styles.date, { color: colors.subtext }]}>
+                        <Text style={[styles.date, { color: colors.subtext, fontSize: tablet ? 24 : 18 }]}>
                             {formatDate(firstDayOfMonth)} - {formatDate(lastDayOfMonth)}
                         </Text>
                         <View style={styles.amountContainer}>
-                            <Text style={[styles.amount, { letterSpacing: 3, color: colors.text }]}>{currency}</Text>
-                            <Text style={[styles.amount, { letterSpacing: 2, color: colors.text }]}>{totalForMonth}</Text>
+                            <Text style={[styles.amount, { letterSpacing: 3, color: colors.text, fontSize: tablet ? 30 : 25 }]}>
+                                {currency}
+                            </Text>
+                            <Text style={[styles.amount, { letterSpacing: 2, color: colors.text, fontSize: tablet ? 30 : 25 }]}>
+                                {totalForMonth}
+                            </Text>
                         </View>
                     </View>
-                    </TouchableOpacity>
+                </TouchableOpacity>
 
                 {/* Conditionally render the picker */}
                 {isPickerVisible && (
@@ -110,13 +114,12 @@ export default function Expenses() {
                     />
                 )}
 
-                <CustomDivider/>
+                <CustomDivider />
 
                 {filteredExpenses.length > 0 ? (
                     <FlatList
                         data={filteredExpenses}
                         renderItem={({ item }) => (
-                         
                             <ExpenseItem
                                 date={item.date.replace(/^\d{4}-/, "")}
                                 title={item.category}
@@ -126,10 +129,10 @@ export default function Expenses() {
                             />
                         )}
                         keyExtractor={(item, index) => index.toString()}
-                        contentContainerStyle={styles.listContainer}
+                        contentContainerStyle={[styles.listContainer, { paddingTop: tablet ? 20 : 10 }]}
                     />
                 ) : (
-                    <Text style={[styles.noExpensesText, { color: colors.subtext }]}>
+                    <Text style={[styles.noExpensesText, { color: colors.subtext, fontSize: tablet ? 22 : 18 }]}>
                         No expenses recorded
                     </Text>
                 )}
@@ -146,33 +149,29 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 20,
-        width: 70,
-        height: 60,
+        width: tablet ? 100 : 70,
+        height: tablet ? 90 : 60,
     },
     centerWrapper: {
-        paddingTop: 30,
+        paddingTop: tablet ? 40 : 30,
         alignItems: 'center',
         justifyContent: 'center',
     },
     date: {
-        fontSize: 18,
         marginVertical: 10,
     },
     amountContainer: {
-        marginVertical: 10,
+        marginVertical: tablet ? 15 : 10,
         flexDirection: 'row',
     },
     amount: {
-        fontSize: 25,
         fontWeight: '600',
     },
     listContainer: {
-      
         paddingTop: 10,
     },
     noExpensesText: {
         textAlign: 'center',
-        fontSize: 18,
         marginTop: 20,
     },
 });

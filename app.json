@@ -35,6 +35,12 @@
           "defaultChannel": "default",
           "sounds": []
         }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow $(WalletGuardian) to access your microphone."
+        }
       ]
     ],
     "extra": {

@@ -1,6 +1,7 @@
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import CustomText from './CustomText';
 
 export default function CustomButton({ onPress, children, style, icon, textStyle, testID,disabled }) {
     const { colors } = useTheme();
@@ -22,9 +23,9 @@ export default function CustomButton({ onPress, children, style, icon, textStyle
             testID={testID} // Apply testID here
         >
             {icon && <AntDesign name={icon} size={24} color={colors.text} />}
-            <Text style={[{ color: colors.text, fontSize: 18 }, textStyle]}>
+            <CustomText style={[{  fontSize: 18 }, textStyle]}>
                 {children}
-            </Text>
+            </CustomText>
         </TouchableOpacity>
     );
 }
