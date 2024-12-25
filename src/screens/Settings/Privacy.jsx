@@ -8,6 +8,7 @@ import {
 import {
   selectVisibleTotalBalance, selectVisibleMonthlyBudget,
   selectVisibleMonthlyGoal,
+  selectVisibleDecimals,
 } from '../../redux/selectors/ui';
 import { selectBudget } from '../../redux/selectors/budget';
 
@@ -18,6 +19,7 @@ export default function Privacy({ navigation }) {
   const visibleTotalBalance = useSelector(selectVisibleTotalBalance);
   const visibleMonthlyBudget = useSelector(selectVisibleMonthlyBudget);
   const visibleMonthlyGoal = useSelector(selectVisibleMonthlyGoal);
+  const visibleDecimal = useSelector(selectVisibleDecimals)
 
   const handleToggle = (element) => {
     if (element === 'monthlyBudget') {
@@ -52,6 +54,12 @@ export default function Privacy({ navigation }) {
           icon="eye-off-outline"
           isSwitchOn={visibleTotalBalance}
           onToggleSwitch={() => handleToggle('totalBalance')}
+        />
+         <SettingsItem
+          text="Show amounts with decimals"
+          icon="information"
+          isSwitchOn={visibleDecimal}
+          onToggleSwitch={() => handleToggle('decimal')}
         />
         <SettingsItem
           text="Monthly Budget"

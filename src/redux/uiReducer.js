@@ -7,6 +7,7 @@ const initialState = {
   visibleMonthlyBudget: false,
   visibleMonthlyGoal: false,
   visibleExpenseDate:true,
+  visibleDecimal:true,
   lastDateIn: '',
   dailyNotification: true,
   overBudgetNotification: true,
@@ -61,6 +62,10 @@ const uiSlice = createSlice({
         case 'monthlyGoal':
           state.visibleMonthlyGoal = !state.visibleMonthlyGoal;
           break;
+        case 'decimal':
+          state.visibleDecimal = !state.visibleDecimal;
+          break;
+          
         default:
           break;
       }

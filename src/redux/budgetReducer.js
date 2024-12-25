@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchBudgetDataFromRealm } from "../realm/realmInstance";
 import { initializeFromRealm } from "./reduxHelpers";
+import { isCurrentMonth } from "../utils/GlobalFunctions";
 
 const initialState = {
   total: 0,
@@ -24,37 +25,54 @@ const budgetSlice = createSlice({
   name: "budget",
   initialState,
   reducers: {
+    // addExpense: (state, action) => {
+    //   const { amount, category, date } = action.payload;
+    //   if(isCurrentMonth(date)){
+    //     state.expense += Number(amount);
+    //     state.total -= Number(amount);
+    //   }
+    //   state.expensesArray.push({ amount, category, date: date });
+    // },
     addExpense: (state, action) => {
       const { amount, category, date } = action.payload;
-      state.expense += Number(amount);
-      state.total -= Number(amount);
-      state.expensesArray.push({ amount, category, date: date });
+      const normalizedAmount = parseFloat(amount); 
+
+      if (isCurrentMonth(date)) {
+        state.expense = parseFloat((state.expense + normalizedAmount).toFixed(2));
+        state.total = parseFloat((state.total - normalizedAmount).toFixed(2));
+      }
+
+      const formattedAmount = normalizedAmount % 1 === 0 
+        ? normalizedAmount.toString() 
+        : normalizedAmount.toFixed(2).toString(); 
+
+      state.expensesArray.push({ amount: formattedAmount, category, date });
     },
     deleteExpense: (state, action) => {
       const { amount, category, date } = action.payload;
-      const normalizedAmount = Number(amount);
+      const normalizedAmount = parseFloat(amount);
 
       const expenseIndex = state.expensesArray.findIndex(
         (expense) =>
-          Number(expense.amount) === normalizedAmount &&
+          parseFloat(expense.amount) === normalizedAmount &&
           expense.category.id === category.id &&
           expense.date === date
       );
 
       if (expenseIndex !== -1) {
-        state.expense -= normalizedAmount;
-        state.total += normalizedAmount;
+        state.expense = parseFloat((state.expense - normalizedAmount).toFixed(2));
+        state.total = parseFloat((state.total + normalizedAmount).toFixed(2));
         state.expensesArray.splice(expenseIndex, 1);
       }
     },
     setTotal: (state, action) => {
       const { salary } = action.payload;
-      state.total = Number(salary);
+      state.total = parseFloat(salary);
     },
     addIncome: (state, action) => {
       const { amount, category, date } = action.payload;
-      state.income += Number(amount);
-      state.total += Number(amount);
+      state.income += parseFloat(amount);
+      state.total += parseFloat(amount);
       state.incomeArray.push({ amount, category, date: date });
     },
     addSubscription: (state, action) => {
@@ -89,17 +107,23 @@ const budgetSlice = createSlice({
     },
     setBudget: (state, action) => {
       const { budget, salaryDifference } = action.payload;
-      const formatedBudget = Number(budget);
+      const formatedBudget = parseFloat(budget);
 
       state.total += salaryDifference;
       state.budget = formatedBudget;
     },
     resetBudgetData: (state, action) => {
       const { salary } = action.payload;
-      state.total = Number(salary);
+      state.total = parseFloat(salary);
       state.expense = 0;
       state.income = 0;
-    }
+    },
+    nullTheExpenses: (state, action) => {
+      console.log('reseting the budget')
+
+      state.total = 2000,
+      state.expensesArray = []
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(initializeBudget.fulfilled, (state, action) => {
@@ -122,6 +146,7 @@ export const {
   updateSubscriptionDate,
   deleteSubscription,
   resetBudgetData,
+  nullTheExpenses,
   initializeBudgetState,
 } = budgetSlice.actions;
 

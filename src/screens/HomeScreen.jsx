@@ -1,9 +1,9 @@
-import { View, StyleSheet, Text, Dimensions, FlatList,Alert } from 'react-native';
+import { View, StyleSheet, Text, Dimensions, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import { lightVibration } from '../utils/vibrationPaterns';
-import { selectVisibleMonthlyBudget, selectVisibleMonthlyGoal, selectVisibleTotalBalance } from '../redux/selectors/ui';
+import { selectVisibleDecimals, selectVisibleMonthlyBudget, selectVisibleMonthlyGoal, selectVisibleTotalBalance } from '../redux/selectors/ui';
 import { selectBudgetData, selectExpensesArray } from '../redux/selectors/budget';
 import BackgroundColorContainer from '../components/UI/BackgroundColorContainer';
 import BackgroundImageContainer from '../components/UI/BackgroundImageContainer';
@@ -15,6 +15,7 @@ import Chart from '../components/Chart';
 import CustomButton from '../components/UI/CustomButton';
 import { selectName } from '../redux/selectors/personalInf';
 import { isTablet } from '../utils/deviceHelper';
+import { useMemo } from 'react';
 const tablet = isTablet()
 
 const { width } = Dimensions.get('window');
@@ -27,15 +28,29 @@ export default function HomeScreen({ navigation }) {
   const visibleIncome = useSelector(selectVisibleTotalBalance);
   const visibleMonthlyBudget = useSelector(selectVisibleMonthlyBudget);
   const visibleMonthlyGoal = useSelector(selectVisibleMonthlyGoal);
+  const visibleDecimal = useSelector(selectVisibleDecimals);
   const expensesArray = useSelector(selectExpensesArray);
+
+  const visibleExpenses = useMemo(() => {
+    return expensesArray.slice(- (tablet ? 6 : 4)).reverse();
+  }, [expensesArray]);
 
   const navigateToAllExpenses = () => {
     lightVibration();
     navigation.navigate('Expenses');
   };
 
-  const leftToSpend = parseFloat(total .toFixed(2));
+  const formatValue = (value) => visibleDecimal ? value.toFixed(2) : Math.round(value).toString();
+
+  const formattedTotal = formatValue(total);
+  const formattedExpense = formatValue(expense);
+  const formattedIncome = formatValue(income);
+
+  const leftToSpend = parseFloat(formattedTotal);
   const budgetSpendings = parseFloat((budget - expense).toFixed(2));
+
+  const formatedBudgetSpendings = formatValue(budgetSpendings);
+  const formatedLeftToSpend = formatValue(leftToSpend);
 
   const chartGoal = [
     { name: 'Expense', amount: expense, color: colors.error },
@@ -51,29 +66,29 @@ export default function HomeScreen({ navigation }) {
       <BackgroundImageContainer>
         <SafeAreaView style={{ flex: 1 }}>
           <FlatList
-            data={expensesArray.slice(0, 4)}
+            data={visibleExpenses}
             ListHeaderComponent={
               <>
                 <View style={styles.nameContainer}>
                   <Text style={[styles.nameText, { color: colors.subtext }]}>Hello, </Text>
-                  <Text style={[styles.nameText, { color: colors.text}]}>{name}</Text>
+                  <Text style={[styles.nameText, { color: colors.text }]}>{name}</Text>
                 </View>
                 <BalanceCard
                   onPress={navigateToAllExpenses}
                   visibleIncome={visibleIncome}
-                  total={total}
-                  expense={expense}
-                  income={income}
+                  total={formattedTotal}
+                  expense={formattedExpense}
+                  income={formattedIncome}
                   currency={currency}
                   colors={colors}
                 />
                 <View style={{ width: '90%', alignSelf: 'center' }}>
                   {visibleMonthlyGoal && (
-                    <Chart chartData={chartGoal} amount={leftToSpend} title="Monthly Goal" text="Left Funds" currency={currency}/>
+                    <Chart chartData={chartGoal} amount={formatedLeftToSpend} title="Monthly Goal" text="Left Funds" currency={currency} />
                   )}
 
                   {visibleMonthlyBudget && (
-                    <Chart chartData={chartBudget} amount={budgetSpendings} title={`Monthly Budget: ${budget} ${currency}`} text="Left Budget" currency={currency}/>
+                    <Chart chartData={chartBudget} amount={formatedBudgetSpendings} title={`Monthly Budget: ${budget} ${currency}`} text="Left Budget" currency={currency} />
                   )}
                 </View>
 
@@ -106,6 +121,7 @@ export default function HomeScreen({ navigation }) {
   );
 }
 
+
 const styles = StyleSheet.create({
   nameContainer: {
     padding: 15,
@@ -128,12 +144,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    padding: tablet?12:8,
+    padding: tablet ? 12 : 8,
     ...(isSmallDevice && { padding: 5 }),
   },
   buttonText: {
 
-    fontSize: tablet?25:16,
+    fontSize: tablet ? 25 : 16,
     ...(isSmallDevice && { fontSize: 14 }),
   },
 });

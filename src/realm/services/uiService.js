@@ -13,6 +13,7 @@ export const fetchUIStateFromRealm = () => {
     visibleMonthlyBudget: uiData.visibleMonthlyBudget,
     visibleMonthlyGoal: uiData.visibleMonthlyGoal,
     visibleExpenseDate:uiData.visibleExpenseDate,
+    visibleDecimal:uiData.visibleDecimal, //the new field 
     lastDateIn: uiData.lastDateIn,
     dailyNotification: uiData.dailyNotification,
     overBudgetNotification: uiData.overBudgetNotification,

@@ -1,7 +1,8 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useEffect } from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import LottieView from 'lottie-react-native';
 import done from '../../../assets/animations/done.json'; 
+import { successVibration } from '../../utils/vibrationPaterns';
 
 const DoneAnimation = ({ visible, onFinish }) => {
   const fadeAnim = useRef(new Animated.Value(1)).current;
@@ -16,6 +17,12 @@ const DoneAnimation = ({ visible, onFinish }) => {
       fadeAnim.setValue(1);
     });
   }, [fadeAnim, onFinish]);
+
+  useEffect(() => {
+    if (visible) {
+      successVibration();
+    }
+  }, [visible]);
 
   return (
     visible && (

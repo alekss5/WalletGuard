@@ -18,6 +18,8 @@ import { selectIsPassSetup, selectJsonToken, selectSalary } from './redux/select
 import { selectBudgetState } from './redux/selectors/budget';
 import { postLoginUser, putRegisterUser } from './utils/https';
 import { setToken } from './redux/personalInfReducer';
+import {  resetBudgetData } from './redux/budgetReducer';
+import { mediumVibration } from './utils/vibrationPaterns';
 
 export default function Head() {
   const isDarkTheme = useSelector(selectTheme);
@@ -96,6 +98,7 @@ export default function Head() {
 
     await setupNotifications(budgetState);
     setTimeout(() => setSplashActive(true), 1500);
+    mediumVibration();
   };
 
   const handleSignup = async () => {
@@ -132,7 +135,9 @@ export default function Head() {
   };
 
   useEffect(() => {
+    // dispatch(nullTheExpenses())
     const handleAppStateChange = (nextAppState) => {
+
       const { lastDateIn } = uiState || {};
       if (appState.match(/inactive|background/) && nextAppState === 'active') {
         const now = new Date();

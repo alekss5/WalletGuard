@@ -74,7 +74,7 @@ export default function Expenses() {
         }, 0);
     };
 
-    const totalForMonth = getTotalForMonth(filteredExpenses);
+    const totalForMonth = getTotalForMonth(filteredExpenses).toFixed(2);
     const handleMonthSelect = (month) => {
         setSelectedMonth(month);
         setPickerVisible(false);

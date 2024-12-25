@@ -88,7 +88,7 @@ const Analytics = () => {
       labels: sortedExpensesByDate.length 
         ? sortedExpensesByDate.map(date => {
             const formattedDate = new Date(date);
-            return `${formattedDate.getDate()}/${formattedDate.getMonth() + 1}`; // or `${formattedDate.getMonth() + 1}/${formattedDate.getDate()}`
+            return `${formattedDate.getDate()}`; // or `${formattedDate.getMonth() + 1}/${formattedDate.getDate()}`
           }) 
         : ["No Data"],
       datasets: [

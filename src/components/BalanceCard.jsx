@@ -9,6 +9,7 @@ const tablet = isTablet()
 
 export default function BalanceCard({ onPress, visibleIncome, total, expense, income, currency, colors }) {
     const totalColor = total < 0 ? colors.error : colors.success;
+    
 
     return (
         <Pressable

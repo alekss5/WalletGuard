@@ -8,7 +8,8 @@ export const uiSchema = {
       visibleMonthlyBudget: { type: "bool", default: false },
       visibleMonthlyGoal: { type: "bool", default: true },
       visibleExpenseDate: { type: "bool", default: true },
-  
+      visibleDecimal: { type: "bool", default: true },
+
       lastDateIn: { type: "string", default: '' },
       dailyNotification: { type: "bool", default: true }, 
       overBudgetNotification: { type: "bool", default: true },

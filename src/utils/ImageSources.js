@@ -4,10 +4,16 @@ class ImageSource {
     FastFood: () => require('../../assets/icons/fast-food.png'),
     Gas: () => require('../../assets/icons/gas.png'),
     Gift: () => require('../../assets/icons/gift.png'),
-    Rent: () => require('../../assets/icons/mortage.png'),
     Shopping: () => require('../../assets/icons/shopping.png'),
+    Cigarettes: () => require('../../assets/icons/cigarettes.png'),
+
     Taxes: () => require('../../assets/icons/taxes.png'),
+    Rent: () => require('../../assets/icons/mortage.png'),
     Electricity: () => require('../../assets/icons/electricity.png'),
+    Insurance: () => require('../../assets/icons/insurance.png'),
+    PhoneBill: () => require('../../assets/icons/phoneBill.png'),
+    WaterBill: () => require('../../assets/icons/waterBill.png'),
+    InternetBill: () => require('../../assets/icons/internetBill.png'),
 
     Food: () => require('../../assets/icons/food.png'),
     Gym: () => require('../../assets/icons/gym.png'),
@@ -16,6 +22,13 @@ class ImageSource {
     PublicTransport: () => require('../../assets/icons/public-transport.png'),
     Groceries: () => require('../../assets/icons/groceries.png'),
     Travel: () => require('../../assets/icons/travel.png'),
+    Cigarettes: () => require('../../assets/icons/cigarettes.png'),
+    Entertainment: () => require('../../assets/icons/entertainment.png'),
+    Education: () => require('../../assets/icons/education.png'),
+    Subscriptions: () => require('../../assets/icons/subscriptions.png'),
+    Investment: () => require('../../assets/icons/investment.png'),
+
+    
   };
 
   static getImageSource(text) {

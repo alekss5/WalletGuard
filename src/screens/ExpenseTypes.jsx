@@ -9,6 +9,7 @@ const expenseTypes = [
   { id: '1', icon: 'FastFood', description: 'Fast Food' },
   { id: '2', icon: 'Gift', description: 'Gift' },
   { id: '3', icon: 'Cash', description: 'Cash' },
+  { id: '25', icon: 'Cigarettes', description: 'Cigarettes' },
   { id: '4', icon: 'Rent', description: 'Rent' },
   { id: '5', icon: 'Taxes', description: 'Taxes' },
   { id: '6', icon: 'Electricity', description: 'Electricity' },
@@ -21,6 +22,17 @@ const expenseTypes = [
   { id: '13', icon: 'PublicTransport', description: 'Public Transport' },
   { id: '14', icon: 'Shopping', description: 'Shopping' },
   { id: '15', icon: 'Travel', description: 'Travel' },
+  { id: '21', icon: 'Entertainment', description: 'Entertainment' },
+  { id: '24', icon: 'Investment', description: 'Investment' },
+
+  //Expens categorie start
+  { id: '18', icon: 'PhoneBill', description: 'Phone Bill' },
+  { id: '19', icon: 'WaterBill', description: 'Water Bill' },
+  { id: '20', icon: 'InternetBill', description: 'Internet Bill' },
+  { id: '23', icon: 'Subscriptions', description: 'Subscriptions' },
+  { id: '17', icon: 'Insurance', description: 'Insurance' },
+  { id: '22', icon: 'Education', description: 'Education' },
+
 ];
 
 export default function ExpenseTypes() {
@@ -44,10 +56,17 @@ export default function ExpenseTypes() {
         style={{ padding: 10 }}
         data={expenseTypes}
         keyExtractor={item => item.id}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <>
-            {item.description === 'Income' && <CustomText style={styles.sectionHeder}>Income</CustomText>}
-            {item.description === 'Fast Food' && <CustomText style={styles.sectionHeder}>Expenses</CustomText>}
+            {/* Display the "Income" section */}
+            {item.description === 'Income' && <CustomText style={styles.sectionHeader}>Income</CustomText>}
+
+            {/* Display the "Expenses" section */}
+            {index === 1 && <CustomText style={styles.sectionHeader}>Expenses</CustomText>}
+
+            {/* Display the "Bills" section */}
+            {item.description === 'Phone Bill' && <CustomText style={styles.sectionHeader}>Bills</CustomText>}
+
             <TouchableOpacity onPress={() => handlePress(item)} style={styles.itemContainer}>
               <Image source={ImageSource.getImageSource(item.icon)} style={styles.icon} />
               <CustomText style={styles.description}>{item.description}</CustomText>
@@ -75,7 +94,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
   },
-  sectionHeder:{
+  sectionHeader:{
     fontSize:18,
     fontWeight:'500',
     padding:10

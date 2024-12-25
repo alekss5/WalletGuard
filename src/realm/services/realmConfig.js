@@ -5,7 +5,7 @@ import { expenseSchema,incomeSchema,subscriptionSchema,categorySchema,budgetSche
 
 const realmConfig = {
   schema: [uiSchema, personalInfoSchema, expenseSchema, incomeSchema, subscriptionSchema, categorySchema, budgetSchema],
-  schemaVersion: 1,
+  schemaVersion: 2,
 };
 
 const realm = new Realm(realmConfig);
